@@ -10,6 +10,7 @@
 Flask Rest API project that helps you keep track of your pet's vaccines, growth and training <br>
 Final project for the Web Applicatons with Flask course in Software University. <br>
 <br>
+</div>
 
 [About](#about) | [Installation](#installation) | [Urls](#urls) | [Roadmap](#roadmap) | [Credits](#credits) | [License](#license)
 
