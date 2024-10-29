@@ -5,13 +5,11 @@
 </a>
 <p>
 <br><br>
-<h1 align=center>Wonderlanders</h1>
+<h1 align=center>Pet Files</h1>
 <h3 align=center>
-A stylish website for travellers built with Django and Python.<br>
-Final project for the Web Framework Course in Software University.<br>
+Flask Rest API project that helps you keep track of your pet's vaccines, growth and training <br>
+Final project for the Web Applicatons with Flask course in Software University. <br>
 <br>
-<a href='https://wonderlanders.tk'> Click here to see the deployed project (N/A) </a>
-<br><br>
 
 [About](#about) | [Installation](#installation) | [Urls](#urls) | [Roadmap](#roadmap) | [Credits](#credits) | [License](#license)
 
