@@ -1,0 +1,8 @@
+SQLAlchemy~=2.0.36
+python-decouple~=3.8.0
+PyJWT~=2.9.0
+pytz~=2024.2
+Werkzeug~=3.0.6
+Flask~=3.0.3
+marshmallow~=3.23.0
+alembic~=1.13.3
