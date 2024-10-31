@@ -7,7 +7,7 @@
 <br><br>
 <h1 align=center>Pet Files</h1>
 <h3 align=center>
-Flask Rest API project that helps you keep track of your pet's vaccines, growth and training <br>
+Flask Rest API project that could be used by veterinary clinics to keep track of all registered pets. <br>
 Final project for the Web Applicatons with Flask course in Software University. <br>
 <br>
 </div>
