@@ -4,5 +4,7 @@ from schemas.base import BaseProductSchema
 
 
 class ProductResponseSchema(BaseProductSchema):
-    id = fields.Integer(required=True)
-    added_on = fields.DateTime(required=True)
+    title = fields.String(required=True)
+    description = fields.String(required=True)
+    amount = fields.Integer(required=True)
+    photo_url = fields.String(required=True)

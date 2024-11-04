@@ -15,7 +15,7 @@ class OrderModel(db.Model):
     address: Mapped[str] = mapped_column(db.String(255), nullable=False)
     customer_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    product_title: Mapped[str] = mapped_column(db.String(255), db.ForeignKey('products.title'), nullable=False)
+    product_title: Mapped[str] = mapped_column(db.String(255), nullable=False)
     status: Mapped[Status] = mapped_column(
         db.Enum(Status),
         default=Status.pending.name,

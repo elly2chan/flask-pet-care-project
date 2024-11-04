@@ -20,10 +20,9 @@ class AddProduct(Resource):
 
 
 class GetProducts(Resource):
-    @validate_schema(ProductRequestSchema)
     def get(self):
         products = ProductManager.get_products()
-        return ProductResponseSchema().dump(products, many=True), 201
+        return ProductResponseSchema().dump(products, many=True), 200
 
 
 class GetProduct(Resource):
@@ -36,7 +35,7 @@ class GetProduct(Resource):
 class EditProduct(Resource):
     @auth.login_required
     @permission_required(RoleType.admin)
-    def patch(self, product_id):
+    def put(self, product_id):
         data = request.get_json()
         ProductManager.edit_product(product_id, data)
         return 204

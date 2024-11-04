@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import func
+from sqlalchemy import func, Date
 from sqlalchemy.orm import Mapped, mapped_column
 
 from db import db
@@ -13,7 +13,7 @@ class PetModel(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(db.String(255), nullable=False)
     gender: Mapped[Gender] = mapped_column(db.Enum(Gender), nullable=False)
-    date_of_birth: Mapped[datetime] = mapped_column(db.DateTime, nullable=True)
+    date_of_birth: Mapped[datetime.date] = mapped_column(Date, nullable=True)
     breed: Mapped[str] = mapped_column(db.String(255), nullable=True)
     owner_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     owner_email: Mapped[str] = mapped_column(db.String(255), nullable=False)

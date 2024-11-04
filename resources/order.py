@@ -12,10 +12,10 @@ from utils.decorators import validate_schema, permission_required
 class PlaceOrder(Resource):
     @auth.login_required
     @validate_schema(OrderRequestSchema)
-    def post(self, product_id):
+    def post(self):
         user = auth.current_user()
         data = request.get_json()
-        order = OrderManager.place_order(user, product_id, data)
+        order = OrderManager.place_order(user, data)
         return OrderResponseSchema().dump(order), 201
 
 

@@ -20,16 +20,15 @@ class AddPet(Resource):
 
 class GetPets(Resource):
     @auth.login_required
-    @validate_schema(PetRequestSchema)
     def get(self):
         user = auth.current_user()
         pets = PetManager.get_pets(user)
-        return PetResponseSchema().dump(pets, many=True), 201
+        return PetResponseSchema().dump(pets, many=True), 200
 
 
 class EditPet(Resource):
     @auth.login_required
-    def patch(self, pet_id):
+    def put(self, pet_id):
         user = auth.current_user()
         data = request.get_json()
         PetManager.edit_pet(pet_id, user, data)

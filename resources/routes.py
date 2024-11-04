@@ -17,8 +17,8 @@ routes = (
     (GetProducts, "/products"), # everyone can see products (public part)
     (GetProduct, "/products/<int:product_id>"),  # everyone can see products (public part)
     (EditProduct, "/products/edit_product/<int:product_id>"),  # only admins can edit products
-    (DeleteProduct, "/products/delete_product<int:product_id>"),  # only admins can remove products
+    (DeleteProduct, "/products/delete_product/<int:product_id>"),  # only admins can remove products
     (PlaceOrder, "/orders/place_order"),  # only authenticated users can place orders
     (ApproveOrder, "/orders/approve_order/<int:order_id>"),  # only admins can approve orders
-    (RejectOrder, "/orders/deny_order/<int:order_id>"),  # only admins can deny orders
+    (RejectOrder, "/orders/reject_order/<int:order_id>"),  # only admins can deny orders
 )

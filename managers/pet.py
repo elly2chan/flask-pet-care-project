@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from werkzeug.exceptions import NotFound, Unauthorized
 
 from db import db
@@ -10,9 +12,17 @@ class PetManager:
     def add_pet(user, data):
         data["owner_id"] = user.id
         data["owner_email"] = user.email
+
+        if 'date_of_birth' in data and isinstance(data['date_of_birth'], str):
+            try:
+                data['date_of_birth'] = datetime.strptime(data['date_of_birth'], "%Y-%m-%d").date()
+            except ValueError as e:
+                raise ValueError(f"Error parsing date_of_birth: {e}")
+
         pet = PetModel(**data)
         db.session.add(pet)
         db.session.flush()
+        return pet
 
     @staticmethod
     def get_pets(user):

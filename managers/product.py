@@ -10,6 +10,7 @@ class ProductManager:
         product = ProductModel(**data)
         db.session.add(product)
         db.session.flush()
+        return product
 
     @staticmethod
     def get_products():

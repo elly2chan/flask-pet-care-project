@@ -1,9 +1,11 @@
-from marshmallow import validates, ValidationError
+from marshmallow import validates, ValidationError, fields
 
 from schemas.base import BaseOrderSchema
 
 
 class OrderRequestSchema(BaseOrderSchema):
+    product_id = fields.Integer(required=True)
+
     @validates('address')
     def validate_address(self, value):
         if len(value) < 5:
