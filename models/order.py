@@ -1,9 +1,10 @@
 from datetime import datetime
 
 from sqlalchemy import func
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from db import db
+from models.enums import Status
 
 
 class OrderModel(db.Model):
@@ -14,7 +15,12 @@ class OrderModel(db.Model):
     address: Mapped[str] = mapped_column(db.String(255), nullable=False)
     customer_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    status: Mapped[str] = mapped_column(db.Enum('pending', 'approved', 'rejected', name='state'), nullable=False)
+    product_title: Mapped[str] = mapped_column(db.String(255), db.ForeignKey('products.title'), nullable=False)
+    status: Mapped[Status] = mapped_column(
+        db.Enum(Status),
+        default=Status.pending.name,
+        nullable=False
+    )
 
     customer = db.relationship('UserModel')
     product = db.relationship('ProductModel')

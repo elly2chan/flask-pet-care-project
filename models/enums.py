@@ -6,7 +6,7 @@ class RoleType(enum.Enum):
     admin = "admin"
 
 
-class State(enum.Enum):
+class Status(enum.Enum):
     pending = "Pending"
     approved = "Approved"
     rejected = "Rejected"

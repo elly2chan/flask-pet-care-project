@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from db import db
@@ -21,5 +22,6 @@ class PetModel(db.Model):
     european_passport: Mapped[bool] = mapped_column(db.Boolean, nullable=True)
     microchip: Mapped[bool] = mapped_column(db.Boolean, nullable=True)
     microchip_id: Mapped[str] = mapped_column(db.String(), nullable=True)
+    added_on: Mapped[datetime] = mapped_column(db.DateTime, server_default=func.now())
 
     owner = db.relationship('UserModel', foreign_keys=[owner_id])
