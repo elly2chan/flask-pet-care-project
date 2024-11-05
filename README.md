@@ -42,7 +42,7 @@ Final project for the Web Applicatons with Flask course in Software University. 
 - [ ] At least 5 tests of the most crucial feature of the app including mocking if needed
 - [ ] 5 integration tests (api tests – from the request to this endpoint to the response)
 - [ ] Factories
-- [ ] The application should be integrated with some 3th service of your choice (could be AWS S3 or AWS Simple email service, or could be a payment provider of your choice) (25 points)
+- [X] The application should be integrated with some 3th service of your choice (could be AWS S3 or AWS Simple email service, or could be a payment provider of your choice) (25 points)
 
 
 <!-- BONUSES -->
