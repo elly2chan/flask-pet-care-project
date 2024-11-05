@@ -73,4 +73,3 @@ def verify_token(token):
         raise Unauthorized('User not found.')
     except Exception as e:
         raise Unauthorized(f'Invalid or missing token: {e}.')
-
