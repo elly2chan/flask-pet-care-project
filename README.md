@@ -20,7 +20,7 @@ Final project for the Web Applicatons with Flask course in Software University. 
 <h4>To install the project, you should first clone the repository and install the requirements:</h4>
 
 ```bash
-git clone https://github.com/elly2chan/django-wonderlanders-project
+git clone https://github.com/elly2chan/flask-pet-files-project.git
 ```
 	
 ```bash
