@@ -12,7 +12,7 @@ Final project for the Web Applicatons with Flask course in Software University. 
 <br>
 </div>
 
-[Description](#description) | [Installation](#installation) | [Endpoints](#urls) | [Roadmap](#roadmap) | [Bonuses](#credits) | [Future Functionalities](#credits) | [License](#license)
+[Description](#description) | [Installation](#installation) | [Endpoints](#endpoints) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Future Functionalities](#futurefunctionalities) | [License](#license)
 
 <!-- INSTALLATION -->
 ## Installation
@@ -160,5 +160,5 @@ routes = (
 
 
 <!-- FUTURE FUNCTIONALITIES -->
-## Future Functionalities
+## FutureFunctionalities
 
