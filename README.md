@@ -159,6 +159,6 @@ routes = (
 - [ ] Any other popular library like pandas, GraphQL and etc. with meaningful usage in the code
 
 
-<!-- FUTURE FUNCTIONALITIES -->
-## FutureFunctionalities
+<!-- FUTUREFUNCTIONALITIES -->
+## Future Functionalities
 
