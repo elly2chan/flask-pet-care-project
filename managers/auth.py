@@ -17,6 +17,7 @@ class AuthManager:
     @staticmethod
     def encode_token(user):
         """Generates a JWT token for a user."""
+
         try:
             payload = {
                 "sub": user.id,
@@ -31,6 +32,7 @@ class AuthManager:
     @staticmethod
     def decode_token(token):
         """Validates a JWT token and retrieves the user information."""
+
         try:
             info = jwt.decode(jwt=token, key=config('SECRET_KEY'), algorithms=['HS256'])
             return info['sub'], info['role']
@@ -44,17 +46,16 @@ class AuthManager:
     @staticmethod
     def change_password(pass_data):
         """Changes the password for the current authenticated user."""
+
         try:
             if 'old_password' not in pass_data or 'new_password' not in pass_data:
                 raise ValueError('Both old and new passwords must be provided.')
 
             user = auth.current_user()
 
-            # Validate old password
             if not check_password_hash(user.password, pass_data['old_password']):
                 raise NotFound('Incorrect old password.')
 
-            # Update the password with the new one
             new_password_hash = generate_password_hash(pass_data['new_password'], method='pbkdf2:sha256')
             user.password = new_password_hash
             db.session.flush()
@@ -65,6 +66,7 @@ class AuthManager:
 @auth.verify_token
 def verify_token(token):
     """Verifies the token and retrieves the user from the database."""
+
     try:
         user_id, user_role = AuthManager.decode_token(token)
         user = db.session.query(UserModel).filter_by(id=user_id).first()
