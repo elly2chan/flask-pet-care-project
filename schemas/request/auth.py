@@ -4,7 +4,7 @@ from password_strength import PasswordPolicy
 from schemas.base import BaseUserSchema
 
 
-class RequestRegisterUserSchema(BaseUserSchema):
+class RegisterUserRequestSchema(BaseUserSchema):
     first_name = fields.String(min_length=2, max_length=20, required=True)
     last_name = fields.String(min_length=2, max_length=20, required=True)
     phone = fields.String(min_length=10, max_length=13, required=True)
@@ -23,11 +23,11 @@ class RequestRegisterUserSchema(BaseUserSchema):
             raise ValidationError("Password must have uppercase letters, numbers and special characters.")
 
 
-class RequestLoginUserSchema(BaseUserSchema):
+class LoginUserRequestSchema(BaseUserSchema):
     pass
 
 
-class PasswordChangeSchema(Schema):
+class PasswordChangeRequestSchema(Schema):
     old_password = fields.String(required=True)
     new_password = fields.String(required=True)
 
