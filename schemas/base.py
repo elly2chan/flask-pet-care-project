@@ -87,23 +87,26 @@ class BaseProductSchema(Schema):
     """
     Base schema for product-related data.
 
-    This schema defines the basic details of a product, such as title, description, price (amount), and photo URL.
+    This schema defines the basic details of a product, such as title, description, quantity, price and photo URL.
 
     Fields:
         title (str): The title or name of the product. This field is required.
         description (str): A brief description of the product. This field is required.
-        amount (int): The price or amount of the product. This field is required.
+        quantity (int): The quantity of the product. This field is required.
+        price (float): The price of the product. This field is required.
         photo_url (str): A URL pointing to the product's image. This field is required.
 
     Example:
         {
             "title": "Cool Dog T-shirt",
             "description": "A comfortable cotton t-shirt for your dog.",
-            "amount": 19,
+            "quantity": 19,
+            "price": 10.50,
             "photo_url": "https://example.com/tshirt.jpg"
         }
     """
     title = fields.String(required=True)
     description = fields.String(required=True)
-    amount = fields.Integer(required=True)
+    quantity = fields.Integer(required=True)
+    price = fields.Float(required=True)
     photo_url = fields.String(required=True)

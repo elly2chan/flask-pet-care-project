@@ -1,11 +1,40 @@
-from werkzeug.exceptions import NotFound
+from werkzeug.exceptions import NotFound, InternalServerError
 
 from db import db
-from models import ProductModel, OrderModel
+from models import ProductModel, OrderModel, TransactionModel
 from models.enums import Status
+from services.wise import WiseService
+
+wise_service = WiseService()
 
 
 class OrderManager:
+    @staticmethod
+    def issue_transaction(amount, first_name, last_name, iban, order_id):
+        quote = wise_service.create_quote(amount)
+        recipient = wise_service.create_recipient(first_name, last_name, iban)
+        transfer = wise_service.create_transfer(recipient["id"], quote["id"])
+        transaction = TransactionModel(
+            quote_id=quote["id"],
+            transfer_id=transfer["id"],
+            target_account_id=recipient["id"],
+            amount=amount,
+            order_id=order_id,
+        )
+        db.session.add(transaction)
+        db.session.flush()
+
+        return transaction, transfer
+
+    @staticmethod
+    def _calculate_total_price(product, quantity):
+        """Calculates the total price based on product price and quantity."""
+        total_price = 0.0
+
+        if product:
+            total_price = product.price * quantity
+        return total_price
+
     @staticmethod
     def place_order(user, data):
         """Place an order by creating a new OrderModel instance."""
@@ -18,9 +47,35 @@ class OrderManager:
 
         data["product_title"] = product.title
 
+        order_total_price = OrderManager._calculate_total_price(product, int(data["quantity"]))
+        data["total_price"] = order_total_price
+
         order = OrderModel(**data)
         db.session.add(order)
         db.session.flush()
+
+        try:
+            # Issue the transaction and send money
+            transaction, transfer = OrderManager.issue_transaction(
+                amount=data["total_price"],
+                first_name=user.first_name,
+                last_name=user.last_name,
+                iban=user.iban,
+                order_id=order.id
+            )
+
+            if transfer["status"] != "incoming_payment_waiting":
+                raise InternalServerError("Transaction failed. Order cannot be processed.")
+
+            order.status = Status.approved
+            db.session.add(order)
+            db.session.flush()
+
+        except Exception as e:
+            order.status = Status.rejected
+            db.session.add(order)
+            db.session.flush()
+            raise InternalServerError(f"Order processing failed: {str(e)}.")
 
     @staticmethod
     def _get_order_or_404(order_id):

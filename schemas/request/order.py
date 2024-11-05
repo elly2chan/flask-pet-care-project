@@ -1,29 +1,33 @@
-from marshmallow import validates, ValidationError, fields
+import re
+
+from marshmallow import validates, ValidationError, fields, validate
+
 from schemas.base import BaseOrderSchema
 
 
 class OrderRequestSchema(BaseOrderSchema):
     """
-    Schema for validating the request data to place a new order.
-
-    This schema requires a `product_id` and validates the `address` field to ensure
-    that the address is at least 5 characters long.
+    Schema to validate order requests. It includes the product ID and address validation.
+    Ensures the provided address meets basic validation rules (e.g., length >= 5).
     """
-    product_id = fields.Integer(required=True)
+
+    product_id = fields.Integer(required=True, error_messages={'required': 'Product ID is required.'})
+    quantity = fields.Integer(
+        required=True,
+        validate=validate.Range(min=1),
+        description="The quantity of products in the order, must be a positive integer."
+    )
 
     @validates('address')
     def validate_address(self, value):
         """
-        Validates the address field.
-
-        The address must be at least 5 characters long. If the provided address
-        does not meet this requirement, a validation error will be raised.
-
-        Args:
-            value (str): The address to validate.
-
-        Raises:
-            ValidationError: If the address is shorter than 5 characters.
+        Validates the address to ensure it meets the minimum length requirement.
+        The address must be at least 5 characters long.
         """
         if len(value) < 5:
             raise ValidationError("Address must be at least 5 characters long.")
+
+        # Regex for a more specific address pattern
+        address_pattern = r"^[a-zA-Z0-9\s,.'-]+$"
+        if not re.match(address_pattern, value):
+            raise ValidationError("Address contains invalid characters.")

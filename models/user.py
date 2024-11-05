@@ -31,3 +31,5 @@ class UserModel(db.Model):
         default=RoleType.user.name,
         nullable=False
     )
+    iban: Mapped[str] = mapped_column(db.String(255), nullable=False, default="BE41967053490210",
+                                      server_default="BE41967053490210")

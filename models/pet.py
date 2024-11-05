@@ -48,4 +48,4 @@ class PetModel(db.Model):
     added_on: Mapped[datetime] = mapped_column(db.DateTime, server_default=func.now())
 
     # Relationships
-    owner = relationship('UserModel', foreign_keys=[owner_id])
+    owner = relationship('UserModel')

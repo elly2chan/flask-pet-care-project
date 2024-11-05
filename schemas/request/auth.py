@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, validates_schema, ValidationError, validates
+from marshmallow import Schema, fields, validates, validates_schema, ValidationError
 from password_strength import PasswordPolicy
 
 from schemas.base import BaseUserSchema
@@ -6,76 +6,77 @@ from schemas.base import BaseUserSchema
 
 class RegisterUserRequestSchema(BaseUserSchema):
     """
-    Schema for validating the request data to register a new user.
-
-    This schema ensures that the incoming data includes required fields like first name,
-    last name, phone number, and a password that meets security policies.
+    Schema for user registration request, which validates the user's
+    first name, last name, phone, iban and password.
     """
-    first_name = fields.String(min_length=2, max_length=20, required=True)
-    last_name = fields.String(min_length=2, max_length=20, required=True)
-    phone = fields.String(min_length=10, max_length=13, required=True)
 
-    # Password policy enforcing at least one uppercase letter, one number, one special character,
-    # and one non-letter character.
+    first_name = fields.String(min_length=2, max_length=20, required=True, error_messages={
+        'required': 'First name is required.',
+        'min_length': 'First name must be between 2 and 20 characters.',
+        'max_length': 'First name must be between 2 and 20 characters.'
+    })
+
+    last_name = fields.String(min_length=2, max_length=20, required=True, error_messages={
+        'required': 'Last name is required.',
+        'min_length': 'Last name must be between 2 and 20 characters.',
+        'max_length': 'Last name must be between 2 and 20 characters.'
+    })
+
+    phone = fields.String(min_length=10, max_length=13, required=True, error_messages={
+        'required': 'Phone number is required.',
+        'min_length': 'Phone number must be between 10 and 13 digits.',
+        'max_length': 'Phone number must be between 10 and 13 digits.'
+    })
+
+    iban = fields.String(min_length=10, max_length=40, required=True, error_messages={
+        'required': 'IBAN is required.',
+        'min_length': 'IBAN must be between 10 and 13 digits.',
+        'max_length': 'IBAN must be between 10 and 13 digits.'
+    })
+
+    # Define password policy with at least one uppercase, one number, one special character
     policy = PasswordPolicy.from_names(
         uppercase=1,
         numbers=1,
         special=1,
-        nonletters=1,
+        nonletters=1
     )
 
     @validates('password')
     def validate_password(self, value):
         """
-        Validates the password according to the defined policy.
-
-        The password must meet the following requirements:
-        - At least one uppercase letter
-        - At least one number
-        - At least one special character
-        - At least one non-letter character
-
-        Args:
-            value (str): The password value to validate.
-
-        Raises:
-            ValidationError: If the password does not meet the policy requirements.
+        Validates the password to ensure it meets the defined policy requirements.
         """
         errors = self.policy.test(value)
         if errors:
-            raise ValidationError("Password must have uppercase letters, numbers, and special characters.")
+            raise ValidationError(
+                "Password must contain at least one uppercase letter, one number, and one special character."
+            )
 
 
 class LoginUserRequestSchema(BaseUserSchema):
     """
-    Schema for validating the request data to log in a user.
-
-    This schema can be extended later if login-specific fields are needed,
-    but currently, it just inherits the basic user schema.
+    Schema for user login request.
+    No additional validation rules are applied to this schema.
     """
     pass
 
 
 class PasswordChangeRequestSchema(Schema):
     """
-    Schema for validating the request data to change a user's password.
-
-    This schema requires the old and new password and ensures that both are not the same.
+    Schema for changing a user's password. It requires the old password
+    and the new password with additional checks to ensure they are not the same.
     """
-    old_password = fields.String(required=True)
-    new_password = fields.String(required=True)
+    old_password = fields.String(required=True, error_messages={'required': 'Old password is required.'})
+    new_password = fields.String(required=True, error_messages={'required': 'New password is required.'})
 
     @validates_schema
     def validate_passwords(self, data, **kwargs):
         """
-        Validates that the old password is not the same as the new password.
-
-        Args:
-            data (dict): The data dictionary containing both 'old_password' and 'new_password'.
-
-        Raises:
-            ValidationError: If the old password is the same as the new password.
+        Ensures that the new password is different from the old password.
         """
         if data["old_password"] == data["new_password"]:
-            raise ValidationError("New password cannot be the same as the old password.",
-                                  field_names=["new_password"])
+            raise ValidationError(
+                "New password cannot be the same as the old password.",
+                field_names=["new_password"]
+            )

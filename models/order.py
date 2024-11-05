@@ -19,6 +19,8 @@ class OrderModel(db.Model):
         product_id (int): The ID of the product that was ordered.
         product_title (str): The title of the product ordered.
         status (Status): The current status of the order (e.g., pending, approved, rejected).
+        quantity (int): The quantity of products in the order.
+        total_price (float): The total price of the order.
         customer (UserModel): The customer who placed the order, represented by a relationship.
         product (ProductModel): The product that was ordered, represented by a relationship.
     """
@@ -34,5 +36,9 @@ class OrderModel(db.Model):
     product_title: Mapped[str] = mapped_column(db.String(255), nullable=False)
     status: Mapped[Status] = mapped_column(Enum(Status), default=Status.pending, nullable=False)
 
-    customer = relationship('UserModel', backref='orders', cascade="all, delete-orphan")
-    product = relationship('ProductModel', backref='orders', cascade="all, delete-orphan")
+    quantity: Mapped[int] = mapped_column(db.Integer, nullable=False, default=1)
+    total_price: Mapped[float] = mapped_column(db.Float, nullable=False, default=0.0)
+
+    # Relationships
+    customer = relationship('UserModel')
+    product = relationship('ProductModel')
