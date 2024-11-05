@@ -48,6 +48,20 @@ class ProductManager:
         db.session.flush()
 
     @staticmethod
+    def reduce_product_quantity(product_id, ordered_quantity):
+        """Reduce quantity of an existing product."""
+
+        product = ProductManager._get_product_or_404(product_id)
+
+        if product.quantity - ordered_quantity >= 0:
+            product.quantity -= ordered_quantity
+        else:
+            raise ValueError(f"Not enough items. Currently product {product.title} has quantity {product.quantity}.")
+
+        db.session.add(product)
+        db.session.flush()
+
+    @staticmethod
     def delete_product(product_id):
         """Deletes a product by ID."""
 

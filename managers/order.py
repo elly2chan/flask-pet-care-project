@@ -1,6 +1,7 @@
 from werkzeug.exceptions import NotFound, InternalServerError
 
 from db import db
+from managers.product import ProductManager
 from models import ProductModel, OrderModel, TransactionModel
 from models.enums import Status
 from services.wise import WiseService
@@ -36,18 +37,28 @@ class OrderManager:
         return total_price
 
     @staticmethod
+    def _get_order_or_404(order_id):
+        """Helper function to get an order or raise NotFound."""
+
+        order = db.session.execute(db.select(OrderModel)).filter_by(id=order_id).scalar()
+        if not order:
+            raise NotFound(f"Order with ID {order_id} not found.")
+        return order
+
+    @staticmethod
     def place_order(user, data):
         """Place an order by creating a new OrderModel instance."""
 
         data["customer_id"] = user.id
 
-        product = db.session.execute(db.select(ProductModel).filter_by(id=data['product_id'])).scalar()
+        product = db.session.execute(db.select(ProductModel).filter_by(id=data["product_id"])).scalar()
         if product is None:
             raise Exception("Product not found.")
 
         data["product_title"] = product.title
 
-        order_total_price = OrderManager._calculate_total_price(product, int(data["quantity"]))
+        order_quantity = data["quantity"]
+        order_total_price = OrderManager._calculate_total_price(product, order_quantity)
         data["total_price"] = order_total_price
 
         order = OrderModel(**data)
@@ -67,6 +78,8 @@ class OrderManager:
             if transfer["status"] != "incoming_payment_waiting":
                 raise InternalServerError("Transaction failed. Order cannot be processed.")
 
+            ProductManager.reduce_product_quantity(product.id, order_quantity)
+
             order.status = Status.approved
             db.session.add(order)
             db.session.flush()
@@ -75,32 +88,6 @@ class OrderManager:
             order.status = Status.rejected
             db.session.add(order)
             db.session.flush()
-            raise InternalServerError(f"Order processing failed: {str(e)}.")
+            raise InternalServerError(f"Order processing failed: {str(e)}")
 
-    @staticmethod
-    def _get_order_or_404(order_id):
-        """Helper function to get an order or raise NotFound."""
-
-        order = db.session.exexcute(db.select(OrderModel)).filter_by(id=order_id).scalar()
-        if not order:
-            raise NotFound(f"Order with ID {order_id} not found.")
         return order
-
-    @staticmethod
-    def approve(order_id):
-        """Approve an order and adjust the product quantity."""
-
-        # TODO decrease quantity of the product
-        order = OrderManager._get_order_or_404(order_id)
-        order.status = Status.approved
-        db.session.add(order)
-        db.session.flush()
-
-    @staticmethod
-    def reject(order_id):
-        """Reject an order."""
-
-        order = OrderManager._get_order_or_404(order_id)
-        order.status = Status.rejected
-        db.session.add(order)
-        db.session.flush()
