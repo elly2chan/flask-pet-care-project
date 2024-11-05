@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, make_response
 from flask_restful import Resource
 
 
@@ -14,4 +14,4 @@ class GetAboutPage(Resource):
         """
         Renders the 'About' page.
         """
-        return render_template('about.html')
+        return make_response(render_template('about.html'))
