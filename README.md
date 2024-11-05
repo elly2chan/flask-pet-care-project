@@ -14,6 +14,106 @@ Final project for the Web Applicatons with Flask course in Software University. 
 
 [Description](#description) | [Installation](#installation) | [Endpoints](#urls) | [Roadmap](#roadmap) | [Bonuses](#credits) | [Future Functionalities](#credits) | [License](#license)
 
+<!-- INSTALLATION -->
+## Installation
+
+<h4>To install the project, you should first clone the repository and install the requirements:</h4>
+
+```bash
+git clone https://github.com/elly2chan/django-wonderlanders-project
+```
+	
+```bash
+pip install -r requirements.txt
+```
+<br>
+
+<h4>Next step is to create a .env file and configure the following:</h4>
+
+```python
+DB_USER = ""
+DB_PASSWORD = ""
+DB_HOST = ""
+DB_PORT = ""
+
+# Production/Development Database (if it's going to be the same)
+DB_NAME = ""
+
+# Test Database
+TEST_DB_NAME = ""
+
+# Used for jwt.encode and jwt.decode
+SECRET_KEY = ""
+
+# You can change the configuration environment from here (prod, dev, testing)
+CONFIG_ENV=""
+
+-----------------------------------------------------------------------------
+
+# Other third party 'secrets'
+
+WISE_API_KEY = ""
+WISE_URL = ""
+WISE_PROFILE_ID = ""
+
+```	
+
+<!-- ENDPOINTS -->
+## Endpoints
+
+<h4>The project has the following endpoints:</h4>
+	
+```python
+routes = (
+    (RegisterUser, "/register"),  # everyone can register
+    (LoginUser, "/login"),  # everyone can log in
+    (ChangePassword, "/users/change_password"),
+    (GetAboutPage, "/about"),  # everyone can see about page (public)
+    (AddPet, "/pets/add_pet"),  # only authenticated users can add pets
+    (GetPets, "/pets"),  # only authenticated users can see their pets, admins can see all pets
+    (EditPet, "/pets/edit_pet/<int:pet_id>"),  # only authenticated users can edit pets, admins can edit all
+    (DeletePet, "/pets/delete_pet/<int:pet_id>"),  # only authenticated users can delete pets, admins can delete all
+    (AddProduct, "/products/add_product"),  # only authenticated admins can add products
+    (GetProducts, "/products"),  # everyone can see products (public part)
+    (GetProduct, "/products/<int:product_id>"),  # everyone can see products (public part)
+    (EditProduct, "/products/edit_product/<int:product_id>"),  # only admins can edit products
+    (DeleteProduct, "/products/delete_product/<int:product_id>"),  # only admins can remove products
+    (PlaceOrder, "/orders/place_order"),  # only authenticated users can place orders
+)```
+
+<h4>Authentication/Authorization</h4>
+	
+```python
+    (RegisterUser, "/register")
+    (LoginUser, "/login")
+    (ChangePassword, "/users/change_password")
+```
+
+<h4>Pets</h4>
+	
+```python
+    (AddPet, "/pets/add_pet")
+    (GetPets, "/pets")
+    (EditPet, "/pets/edit_pet/<int:pet_id>")
+    (DeletePet, "/pets/delete_pet/<int:pet_id>")
+```
+
+<h4>Products</h4>
+	
+```python
+    (AddProduct, "/products/add_product")
+    (GetProducts, "/products")
+    (GetProduct, "/products/<int:product_id>")
+    (EditProduct, "/products/edit_product/<int:product_id>")
+    (DeleteProduct, "/products/delete_product/<int:product_id>")
+```
+
+<h4>Orders</h4>
+	
+```python
+    (PlaceOrder, "/orders/place_order")
+```
+
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -56,3 +156,8 @@ Final project for the Web Applicatons with Flask course in Software University. 
 - [ ] Different patterns with meaningful usage
 - [X] If the application is a creative app (something that helps you automate daily tasks, or we will be used by real users – your friends or family), something that solves an actual problem and has a potential to grow and be used
 - [ ] Any other popular library like pandas, GraphQL and etc. with meaningful usage in the code
+
+
+<!-- FUTURE FUNCTIONALITIES -->
+## Future Functionalities
+
