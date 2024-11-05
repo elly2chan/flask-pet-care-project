@@ -79,7 +79,8 @@ routes = (
     (EditProduct, "/products/edit_product/<int:product_id>"),  # only admins can edit products
     (DeleteProduct, "/products/delete_product/<int:product_id>"),  # only admins can remove products
     (PlaceOrder, "/orders/place_order"),  # only authenticated users can place orders
-)```
+)
+```
 
 <h4>Authentication/Authorization</h4>
 	
