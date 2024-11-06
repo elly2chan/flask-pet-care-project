@@ -133,16 +133,16 @@ routes = (
 - [X] All imports should be in the correct order (you can use ctr+alt+o in PyCharm for automatic reordering) (2 points)
 - [X] Use a source control system by choice – GitHub is preferred. (10 points)
 - [X] The application should use relational database for persistent storage (20 points)
-- [ ] All third-party libraries/packages should be listed in requirements.txt file in the root folder of the project with their versions
+- [X] All third-party libraries/packages should be listed in requirements.txt file in the root folder of the project with their versions
 - [X] For database credentials or other secret keys and data you should use environment variables which are not committed in the repo (or hardcoded in the code) (10 points)
 - [X] Gitignore file is mandatory to exclude all sensitive data, caches and etc. (5 points)
 - [ ] At least one page of good described ReadMe file (should include how to install the dependencies, what are the endpoints, which are protected, what they return and what are the conditions to access them, the description of the project itself, future functionality) (5 points)
 - [X] At least one migration (up to 10 points – each migration is 2 points)
-- [ ] Tests (30 points)
+- [X] Tests (30 points)
 - [X] At least 5 meaningful commits
-- [ ] At least 5 tests of the most crucial feature of the app including mocking if needed
-- [ ] 5 integration tests (api tests – from the request to this endpoint to the response)
-- [ ] Factories
+- [X] At least 5 tests of the most crucial feature of the app including mocking if needed
+- [X] 5 integration tests (api tests – from the request to this endpoint to the response)
+- [X] Factories
 - [X] The application should be integrated with some 3th service of your choice (could be AWS S3 or AWS Simple email service, or could be a payment provider of your choice) (25 points)
 
 
@@ -153,7 +153,7 @@ routes = (
 - [ ] Deployment
 - [ ] CI or CD (with GitHub actions or Jenkins)
 - [ ] Documentation / Swagger
-- [ ] Front end application (with framework like Angular, React VueJS or only vanilla JS)
+- [X] Front end application (with framework like Angular, React VueJS or only vanilla JS) - partially, only one page is currently available
 - [ ] Different patterns with meaningful usage
 - [X] If the application is a creative app (something that helps you automate daily tasks, or we will be used by real users – your friends or family), something that solves an actual problem and has a potential to grow and be used
 - [ ] Any other popular library like pandas, GraphQL and etc. with meaningful usage in the code
@@ -162,3 +162,5 @@ routes = (
 <!-- FUTUREFUNCTIONALITIES -->
 ## Future Functionalities
 
+- [ ] Full front end application with React
+- [ ] Add more 3th service integrations
