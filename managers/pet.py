@@ -1,9 +1,10 @@
 from datetime import datetime
 
+from flask import jsonify
 from werkzeug.exceptions import NotFound, Unauthorized
 
 from db import db
-from models.enums import RoleType
+from models.enums import RoleType, Gender, PetType
 from models.pet import PetModel
 
 
@@ -22,6 +23,14 @@ class PetManager:
                 raise ValueError(f"Error parsing date_of_birth: {e}.")
         elif not isinstance(data['date_of_birth'], datetime):
             raise ValueError("date_of_birth must be a string or a datetime object.")
+
+        try:
+            if 'gender' in data:
+                data['gender'] = Gender[data['gender'].lower()]
+            if 'pet_type' in data:
+                data['pet_type'] = PetType[data['pet_type'].lower()]
+        except KeyError as e:
+            return jsonify({"error": f"Invalid value for {str(e)}."}), 400
 
         pet = PetModel(**data)
         db.session.add(pet)
