@@ -1,247 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>API Documentation - About</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    .section {
-      margin-bottom: 40px;
-    }
-    .model, .endpoint {
-      background-color: #fff;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-    }
-    h2 {
-      color: #4CAF50;
-    }
-    .model h3, .endpoint h3 {
-      color: #333;
-    }
-    .field-list, .endpoint-list {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    .field-list li, .endpoint-list li {
-      margin-bottom: 10px;
-    }
-    .code-block {
-      background-color: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-      font-family: 'Courier New', monospace;
-    }
-    .restricted {
-      color: red;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project About - Documentation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #0b3d91;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        section {
+            padding: 30px 50px;
+        }
+        h2 {
+            color: #0b3d91;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            margin: 5px 0;
+        }
+        .section-content {
+            display: none;
+        }
+        .section-content.active {
+            display: block;
+        }
+        .btn-toggle {
+            background-color: #0b3d91;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .btn-toggle:hover {
+            background-color: #005aa7;
+        }
+        .api-call {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .api-call pre {
+            margin: 0;
+            font-size: 1.1em;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .api-call p {
+            font-weight: bold;
+        }
+        .api-doc {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>API Documentation</h1>
+    <header>
+        <h1>Project API Documentation</h1>
+        <p>Learn how to use the system's API and integrate it into your projects</p>
+    </header>
 
-  <!-- Project Overview Section -->
-  <div class="section">
-    <h2>Project Overview</h2>
-    <p>This API provides a platform for managing pets, products, orders, and users. The system is designed to allow users to register, view products, place orders, and manage pets, with role-based access control for administrative functionalities.</p>
-  </div>
+    <section id="overview">
+        <h2>Project Overview</h2>
+        <p>This project is an API service that provides various functionalities including user management, pet management, product catalog, and order placement.</p>
+        <p>Below you will find the details of the available API endpoints and how to interact with the system. You can register, log in, manage pets, manage products, and place orders using these endpoints.</p>
+        <button class="btn-toggle" onclick="toggleSection('overview')">Read More</button>
+        <div class="section-content" id="overview-content">
+            <p>The API uses JWT (JSON Web Tokens) for user authentication and authorization. The main components of the system are:</p>
+            <ul>
+                <li>User Registration and Authentication</li>
+                <li>Pet Management (Add, Edit, Delete Pets)</li>
+                <li>Product Catalog (View, Add, Edit, Delete Products)</li>
+                <li>Order Management (Place Orders)</li>
+            </ul>
+        </div>
+    </section>
 
-  <!-- Models Section -->
-  <div class="section">
-    <h2>Models</h2>
+    <section id="api-doc">
+        <h2>API Documentation</h2>
+        <div class="api-doc">
+            <h3>Authentication</h3>
+            <div class="api-call">
+                <p><strong>POST /login</strong> - Login an existing user</p>
+                <pre>
+POST /login
+Content-Type: application/json
+{
+    "email": "user@example.com",
+    "password": "your_password"
+}
+                </pre>
+            </div>
 
-    <!-- User Model -->
-    <div class="model">
-      <h3>UserModel</h3>
-      <ul class="field-list">
-        <li><strong>id</strong>: Integer, primary key</li>
-        <li><strong>email</strong>: String, unique</li>
-        <li><strong>password</strong>: String</li>
-        <li><strong>first_name</strong>: String</li>
-        <li><strong>last_name</strong>: String</li>
-        <li><strong>phone</strong>: String</li>
-        <li><strong>role</strong>: Enum (user/admin)</li>
-      </ul>
-    </div>
+            <div class="api-call">
+                <p><strong>POST /register</strong> - Register a new user</p>
+                <pre>
+POST /register
+Content-Type: application/json
+{
+    "username": "newuser",
+    "email": "newuser@example.com",
+    "password": "your_password"
+}
+                </pre>
+            </div>
 
-    <!-- Pet Model -->
-    <div class="model">
-      <h3>PetModel</h3>
-      <ul class="field-list">
-        <li><strong>id</strong>: Integer, primary key</li>
-        <li><strong>name</strong>: String</li>
-        <li><strong>gender</strong>: Enum (male/female)</li>
-        <li><strong>date_of_birth</strong>: Date</li>
-        <li><strong>breed</strong>: String</li>
-        <li><strong>owner_id</strong>: Integer, foreign key (User)</li>
-        <li><strong>pet_type</strong>: Enum (dog/cat)</li>
-        <li><strong>is_stray</strong>: Boolean</li>
-        <li><strong>microchip</strong>: Boolean</li>
-      </ul>
-    </div>
+            <div class="api-call">
+                <p><strong>POST /users/change_password</strong> - Change your password</p>
+                <pre>
+POST /users/change_password
+Authorization: Bearer <your_token>
+Content-Type: application/json
+{
+    "old_password": "oldpassword",
+    "new_password": "newpassword"
+}
+                </pre>
+            </div>
 
-    <!-- Order Model -->
-    <div class="model">
-      <h3>OrderModel</h3>
-      <ul class="field-list">
-        <li><strong>id</strong>: Integer, primary key</li>
-        <li><strong>created_on</strong>: DateTime</li>
-        <li><strong>address</strong>: String</li>
-        <li><strong>customer_id</strong>: Integer, foreign key (User)</li>
-        <li><strong>product_id</strong>: Integer, foreign key (Product)</li>
-        <li><strong>product_title</strong>: String</li>
-        <li><strong>status</strong>: Enum (pending/approved/rejected)</li>
-      </ul>
-    </div>
-  </div>
+            <h3>Pet Management</h3>
+            <div class="api-call">
+                <p><strong>POST /pets/add_pet</strong> - Add a new pet</p>
+                <pre>
+POST /pets/add_pet
+Authorization: Bearer <your_token>
+Content-Type: application/json
+{
+    "name": "Fluffy",
+    "species": "Cat",
+    "age": 2
+}
+                </pre>
+            </div>
 
-  <!-- Managers Section -->
-  <div class="section">
-    <h2>Managers</h2>
-    <div>
-      <h3>AuthManager</h3>
-      <p>Handles authentication tasks such as login, registration, and token generation.</p>
-    </div>
-    <div>
-      <h3>OrderManager</h3>
-      <p>Manages orders: placing new orders, approving or rejecting them, and updating order statuses.</p>
-    </div>
-    <div>
-      <h3>ProductManager</h3>
-      <p>Handles product-related tasks like adding, editing, and deleting products.</p>
-    </div>
-  </div>
+            <div class="api-call">
+                <p><strong>GET /pets</strong> - Retrieve all pets</p>
+                <pre>
+GET /pets
+Authorization: Bearer <your_token>
+                </pre>
+            </div>
 
-  <!-- Endpoints Section -->
-  <div class="section">
-    <h2>Endpoints</h2>
+            <h3>Product Management</h3>
+            <div class="api-call">
+                <p><strong>POST /products/add_product</strong> - Add a new product</p>
+                <pre>
+POST /products/add_product
+Authorization: Bearer <your_token>
+Content-Type: application/json
+{
+    "name": "Pet Shampoo",
+    "price": 10.99,
+    "description": "Shampoo for your pets"
+}
+                </pre>
+            </div>
 
-    <!-- Public Endpoints -->
-    <div class="endpoint">
-      <h3>Public Endpoints</h3>
-      <ul class="endpoint-list">
-        <li>
-          <strong>POST /register</strong> - Register a new user
-          <div class="code-block">
-            <strong>Request Body:</strong>
-            <pre>
-            {
-              "email": "user@example.com",
-              "password": "strongpassword",
-              "first_name": "John",
-              "last_name": "Doe"
-            }
-            </pre>
-            <strong>Response:</strong>
-            <pre>
-            {
-              "message": "User registered successfully"
-            }
-            </pre>
-          </div>
-        </li>
-        <li>
-          <strong>POST /login</strong> - Log in a user
-          <div class="code-block">
-            <strong>Request Body:</strong>
-            <pre>
-            {
-              "email": "user@example.com",
-              "password": "strongpassword"
-            }
-            </pre>
-            <strong>Response:</strong>
-            <pre>
-            {
-              "token": "jwt_token_here"
-            }
-            </pre>
-          </div>
-        </li>
-        <li>
-          <strong>GET /about</strong> - Get information about the API
-          <div class="code-block">
-            <strong>Response:</strong>
-            <pre>
-            {
-              "message": "This is the about page for the API."
-            }
-            </pre>
-          </div>
-        </li>
-      </ul>
-    </div>
+            <div class="api-call">
+                <p><strong>GET /products</strong> - Retrieve all products</p>
+                <pre>
+GET /products
+                </pre>
+            </div>
 
-    <!-- Restricted Endpoints -->
-    <div class="endpoint">
-      <h3>Restricted Endpoints</h3>
-      <ul class="endpoint-list">
-        <li>
-          <strong>POST /pets/add_pet</strong> - Add a new pet (Authenticated users only)
-          <div class="code-block">
-            <strong>Request Body:</strong>
-            <pre>
-            {
-              "name": "Fluffy",
-              "gender": "female",
-              "breed": "Golden Retriever",
-              "pet_type": "dog"
-            }
-            </pre>
-            <strong>Response:</strong>
-            <pre>
-            {
-              "message": "Pet added successfully"
-            }
-            </pre>
-          </div>
-        </li>
-        <li>
-          <strong>POST /orders/place_order</strong> - Place an order (Authenticated users only)
-          <div class="code-block">
-            <strong>Request Body:</strong>
-            <pre>
-            {
-              "address": "123 Main St",
-              "product_id": 1
-            }
-            </pre>
-            <strong>Response:</strong>
-            <pre>
-            {
-              "message": "Order placed successfully"
-            }
-            </pre>
-          </div>
-        </li>
-        <li>
-          <strong>PUT /orders/approve_order/{order_id}</strong> - Approve an order (Admin only)
-          <div class="code-block">
-            <strong>Response:</strong>
-            <pre>
-            {
-              "message": "Order approved"
-            }
-            </pre>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+            <h3>Order Management</h3>
+            <div class="api-call">
+                <p><strong>POST /orders/place_order</strong> - Place an order</p>
+                <pre>
+POST /orders/place_order
+Authorization: Bearer <your_token>
+Content-Type: application/json
+{
+    "product_id": 1,
+    "quantity": 2
+}
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Project Name | All rights reserved</p>
+    </footer>
+
+    <script>
+        // Toggle visibility for sections
+        function toggleSection(sectionId) {
+            const section = document.getElementById(`${sectionId}-content`);
+            section.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
