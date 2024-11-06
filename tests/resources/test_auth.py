@@ -1,3 +1,6 @@
+import pytest
+from werkzeug.exceptions import NotFound
+
 from db import db
 from models import UserModel
 from tests.base import app, database, client
@@ -35,6 +38,19 @@ def test_register_user(client, database):
     assert user.password != password  # Ensure password is hashed
 
 
+def test_register_user_missing_fields(client, database):
+    """
+    Test user registration with missing required fields.
+    """
+    user_data = {
+        "email": "test@example.com"  # Missing password
+    }
+
+    response = client.post("/register", json=user_data)
+    assert response.status_code == 400
+    assert "password" in response.json["message"]  # Password is required
+
+
 def login_data():
     """
     Helper function to generate login data for the first user in the database.
@@ -66,6 +82,21 @@ def test_login_user(client, database):
     # Ensure the token is returned in the response
     token = response.json["token"]
     assert token is not None
+
+
+def test_login_user_incorrect_password(client, database):
+    """
+    Test user login with an incorrect password.
+    """
+    UserFactory(password=USER_PASSWORD)
+
+    # Attempt to log in with an incorrect password
+    user, data = login_data()
+    data["password"] = "wrongpassword"  # Modify password
+
+    response = client.post("/login", json=data)
+    assert response.status_code == 400  # Unauthorized
+    assert "Invalid username or password." in response.json["message"]
 
 
 def test_change_password(client, database):
