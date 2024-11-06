@@ -16,6 +16,7 @@ class UserModel(db.Model):
         last_name (str): The user's last name. This is an optional field.
         phone (str): The user's phone number. This is an optional field.
         role (str): The user's role in the system (default is 'user'). This is a required field.
+        iban (str): The user's iban. This is a required field.
     """
 
     __tablename__ = 'users'
