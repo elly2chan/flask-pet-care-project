@@ -137,8 +137,8 @@
             background-color: #333;
             color: #fff;
             width: 100%;
-            position: fixed;
             bottom: 0;
+            margin-top: 40px;
         }
 
         footer a {
@@ -314,6 +314,35 @@
                         <p><strong>Response:</strong></p>
                         <pre><code>{
     "message": "Pet deleted successfully"
+}</code></pre>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- appointment Endpoints -->
+            <button class="collapsible">Appointment Endpoints</button>
+            <div class="content">
+
+                <!-- Book Appointment -->
+                <button class="collapsible">POST /appointments/book - Book an Appointment</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /appointments/book</h3>
+                        <p><strong>Description:</strong> Books an appointment for the authenticated user's pet. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "pet_id": 1,
+    "appointment_time": "2024-11-10T10:00:00",
+    "appointment_type": "checkup"
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "id": 1,
+    "pet_id": 1,
+    "appointment_time": "2024-11-10T10:00:00",
+    "appointment_type": "checkup",
+    "message": "Appointment booked successfully"
 }</code></pre>
                     </div>
                 </div>

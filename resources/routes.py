@@ -30,6 +30,7 @@ routes = (
     (EditProduct, "/products/edit_product/<int:product_id>"),  # only admins can edit products
     (DeleteProduct, "/products/delete_product/<int:product_id>"),  # only admins can remove products
     (PlaceOrder, "/orders/place_order"),  # only authenticated users can place orders
-    (BookAppointment, "/appointments/book_appointment"),
+
     # only authenticated users can book an appointment if they have any registered pets
+    (BookAppointment, "/appointments/book_appointment"),
 )

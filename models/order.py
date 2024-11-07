@@ -37,12 +37,12 @@ class OrderModel(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     created_on: Mapped[datetime] = mapped_column(db.DateTime, default=func.now())
     address: Mapped[str] = mapped_column(db.String(255), nullable=False)
+
     customer_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
-    product_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('products.id', ondelete='CASCADE'),
-                                            nullable=False)
+    product_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+
     product_title: Mapped[str] = mapped_column(db.String(255), nullable=False)
     status: Mapped[Status] = mapped_column(Enum(Status), default=Status.pending, nullable=False)
-
     quantity: Mapped[int] = mapped_column(db.Integer, nullable=False, default=1)
     total_price: Mapped[float] = mapped_column(db.Float, nullable=False, default=0.0)
 
