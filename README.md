@@ -14,7 +14,7 @@
 <!-- DESCRIPTION -->
 ## Description
 
-# PetCare API Documentation
+
 
 ## Project Overview
 
