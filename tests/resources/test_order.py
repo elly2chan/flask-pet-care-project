@@ -34,6 +34,10 @@ def test_place_order_success(client, database, user, auth_token):
     }
     headers = {"Authorization": f"Bearer {auth_token}"}
 
+    with patch('managers.order.OrderManager.issue_transaction') as mock_transaction:
+        # Simulate a successful transaction by returning mock transaction and transfer
+        mock_transaction.return_value = ("mock_transaction", {"status": "incoming_payment_waiting"})
+
     response = client.post("/orders/place_order", json=order_data, headers=headers)
 
     assert response.status_code == 201
