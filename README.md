@@ -137,7 +137,7 @@ WISE_PROFILE_ID = ""
 - [X] Write tests for at least 60% coverage on your business logic
 - [ ] Deployment
 - [ ] CI or CD (with GitHub actions or Jenkins)
-- [ ] Documentation / Swagger
+- [X] Documentation / Swagger (custom API documentation)
 - [X] Front end application (with framework like Angular, React VueJS or only vanilla JS) - partially, only one page is currently available
 - [ ] Different patterns with meaningful usage
 - [X] If the application is a creative app (something that helps you automate daily tasks, or we will be used by real users – your friends or family), something that solves an actual problem and has a potential to grow and be used
