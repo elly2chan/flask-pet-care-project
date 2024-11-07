@@ -9,7 +9,7 @@
 <h3 align=center>
 </div>
 
-[Description](#description) | [Installation](#installation) | [Endpoints](#endpoints) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Future Functionalities](#future-functionalities)
+[Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features)
 
 <!-- DESCRIPTION -->
 ## Description
@@ -49,8 +49,9 @@ Restricted to users with admin roles:
 - `POST /products/delete_product/{product_id}` - Remove a product from the system.
 - `GET /pets` - Admins can view all pets in the system (not just their own).
 
-## Upcoming Features
-- **Vet Appointment Booking**: In a future update, users will be able to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
+
+All of the endpoints with example data and description that includes what kind of authorizations are needed, can be seen when you run the server.
+This endpoint renders the template - (GetDocumentationPage, "/"),  # everyone can see the documentation page (public).
 
 
 <!-- INSTALLATION -->
@@ -97,66 +98,6 @@ WISE_PROFILE_ID = ""
 
 ```	
 
-<!-- ENDPOINTS -->
-## Endpoints
-
-<h4>The project has the following endpoints:</h4>
-	
-```python
-routes = (
-    (RegisterUser, "/register"),  # everyone can register
-    (LoginUser, "/login"),  # everyone can log in
-    (ChangePassword, "/users/change_password"),
-    (GetDocumentationPage, "/"),  # everyone can see the documentation page (public)
-    (AddPet, "/pets/add_pet"),  # only authenticated users can add pets
-    (GetPets, "/pets"),  # only authenticated users can see their pets, admins can see all pets
-    (EditPet, "/pets/edit_pet/<int:pet_id>"),  # only authenticated users can edit pets, admins can edit all
-    (DeletePet, "/pets/delete_pet/<int:pet_id>"),  # only authenticated users can delete pets, admins can delete all
-    (AddProduct, "/products/add_product"),  # only authenticated admins can add products
-    (GetProducts, "/products"),  # everyone can see products (public part)
-    (GetProduct, "/products/<int:product_id>"),  # everyone can see products (public part)
-    (EditProduct, "/products/edit_product/<int:product_id>"),  # only admins can edit products
-    (DeleteProduct, "/products/delete_product/<int:product_id>"),  # only admins can remove products
-    (PlaceOrder, "/orders/place_order"),  # only authenticated users can place orders
-)
-```
-
-<h4>Authentication/Authorization</h4>
-	
-```python
-    (RegisterUser, "/register")
-    (LoginUser, "/login")
-    (ChangePassword, "/users/change_password")
-```
-
-<h4>Pets</h4>
-	
-```python
-    (AddPet, "/pets/add_pet")
-    (GetPets, "/pets")
-    (EditPet, "/pets/edit_pet/<int:pet_id>")
-    (DeletePet, "/pets/delete_pet/<int:pet_id>")
-```
-
-<h4>Products</h4>
-	
-```python
-    (AddProduct, "/products/add_product")
-    (GetProducts, "/products")
-    (GetProduct, "/products/<int:product_id>")
-    (EditProduct, "/products/edit_product/<int:product_id>")
-    (DeleteProduct, "/products/delete_product/<int:product_id>")
-```
-
-<h4>Orders</h4>
-	
-```python
-    (PlaceOrder, "/orders/place_order")
-```
-
-All of the endpoints with example data and description that includes what kind of authorizations are needed, can be seen when you run the server.
-This endpoint renders the template - (GetDocumentationPage, "/"),  # everyone can see the documentation page (public).
-
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -202,17 +143,10 @@ This endpoint renders the template - (GetDocumentationPage, "/"),  # everyone ca
 - [ ] Any other popular library like pandas, GraphQL and etc. with meaningful usage in the code
 
 
-<!-- FUTUREFUNCTIONALITIES -->
-## Future Functionalities
-
-- [ ] Full front end application with React
-- [ ] Add more 3th service integrations
-- [ ] Add endpoints to book an appointment for your pet/s
+<!-- UPCOMING FUNCTIONALITIES -->
+## Upcoming Features
+- **Vet Appointment Booking**: In a future update, users will be able to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
 
 
-<!-- License -->
-## License
-
-## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
