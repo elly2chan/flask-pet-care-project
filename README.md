@@ -52,7 +52,7 @@ Restricted to users with admin roles:
 
 
 All of the endpoints with example data and description that includes what kind of authorizations are needed, can be seen when you run the server.
-This endpoint renders the template - (GetDocumentationPage, "/"),  # everyone can see the documentation page (public).
+This endpoint renders the template - (GetDocumentationPage, "/"). Everyone can see the documentation page. It is a public endpoint.
 
 
 <!-- INSTALLATION -->
