@@ -21,7 +21,7 @@ The **PetCare API** is a comprehensive platform designed to help users manage th
 - **Pet Management**: Add, view, edit, and delete pets.
 - **Product Management**: View products (public) and manage product details (admin).
 - **Order Management**: Place and manage product orders.
-- **Vet Appointment Booking** *(Coming Soon)*: Schedule vet appointments for pets.
+- **Vet Appointment Booking**: Schedule vet appointments for pets.
 
 ## API Structure
 
@@ -41,6 +41,7 @@ Accessible only to authenticated users (via JWT token):
 - `GET /pets` - Retrieve a list of the user’s pets.
 - `POST /orders/place_order` - Place an order for products.
 - `POST /users/change_password` - Change the user's password.
+- `POST /appointments/book_appointment` - Book a vet appointment for a user's pet.
 
 ### Admin Endpoints
 Restricted to users with admin roles:
@@ -146,8 +147,7 @@ WISE_PROFILE_ID = ""
 <!-- UPCOMING FUNCTIONALITIES -->
 ## Upcoming Features
 
-- **Vet Appointment Booking**: In a future update, users will be able to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
-
+- **Add an option to look for closest vet clinics**: In a future update, users will be able to look for the closest vet clinic near them by providing an address. Then they can use the already existing functionality to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
 
 
 <!-- License -->
