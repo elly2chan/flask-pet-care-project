@@ -257,9 +257,15 @@
                         <p><strong>Description:</strong> Adds a new pet for the authenticated user. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
                         <p><strong>Request Body:</strong></p>
                         <pre><code>{
-    "name": "Rex",
-    "species": "Dog",
-    "age": 3
+    "name": "Koda",
+    "gender": "male",
+    "date_of_birth": "2024-07-28",
+    "breed": "Mixed Breed",
+    "pet_type": "dog",
+    "is_stray": true,
+    "european_passport": true,
+    "microchip": true,
+    "microchip_id": "1234567890"
 }</code></pre>
                         <p><strong>Response:</strong></p>
                         <pre><code>{
@@ -277,12 +283,29 @@
                         <p><strong>Response:</strong></p>
                         <pre><code>[
     {
-        "id": 1,
-        "name": "Rex",
-        "species": "Dog",
-        "age": 3
+        "name": "Archie",
+        "gender": "male",
+        "date_of_birth": "2010-12-28",
+        "breed": "Chihuahua",
+        "pet_type": "dog",
+        "is_stray": false,
+        "european_passport": true,
+        "microchip": false,
+        "microchip_id": null
+    },
+    {
+        "name": "Koda",
+        "gender": "male",
+        "date_of_birth": "2024-07-28",
+        "breed": "Mixed Breed",
+        "pet_type": "dog",
+        "is_stray": true,
+        "european_passport": true,
+        "microchip": true,
+        "microchip_id": "1234567890"
     }
-]</code></pre>
+]
+</code></pre>
                     </div>
                 </div>
 
@@ -295,8 +318,7 @@
                         <p><strong>Request Body:</strong></p>
                         <pre><code>{
     "name": "Rexy",
-    "species": "Dog",
-    "age": 4
+    "breed": "Mixed Breed",
 }</code></pre>
                         <p><strong>Response:</strong></p>
                         <pre><code>{
@@ -332,17 +354,20 @@
                         <p><strong>Description:</strong> Books an appointment for the authenticated user's pet. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
                         <p><strong>Request Body:</strong></p>
                         <pre><code>{
-    "pet_id": 1,
-    "appointment_time": "2024-11-10T10:00:00",
-    "appointment_type": "checkup"
+    "appointment_datetime": "2024-05-06 15:00:05",
+    "pet_name": "Koda",
+    "appointment_reason": "Vaccine"
 }</code></pre>
                         <p><strong>Response:</strong></p>
                         <pre><code>{
     "id": 1,
-    "pet_id": 1,
-    "appointment_time": "2024-11-10T10:00:00",
-    "appointment_type": "checkup",
-    "message": "Appointment booked successfully"
+    "appointment_datetime": "2024-05-06 15:00:05",
+    "owner_id": 1,
+    "owner_name": "Elena Konstantinova",
+    "owner_phone": "0888888888",
+    "pet_id": 3,
+    "pet_name": "Koda",
+    "appointment_reason": "Vaccine"
 }</code></pre>
                     </div>
                 </div>
@@ -361,8 +386,9 @@
                         <p><strong>Description:</strong> Allows authenticated users to place an order. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
                         <p><strong>Request Body:</strong></p>
                         <pre><code>{
+    "address": "Sofia, Reduta",
     "product_id": 1,
-    "quantity": 2
+    "quantity": 3
 }</code></pre>
                         <p><strong>Response:</strong></p>
                         <pre><code>{
@@ -386,16 +412,11 @@
                         <p><strong>Response:</strong></p>
                         <pre><code>[
     {
-        "id": 1,
-        "name": "Dog Food",
-        "price": 19.99,
-        "description": "High quality dog food."
-    },
-    {
-        "id": 2,
-        "name": "Dog T-Shirt",
-        "price": 9.99,
-        "description": "Funny dog T-Shirt."
+        "title": "Dog T-Shirt",
+        "description": "A funny dog T-Shirt",
+        "quantity": 34,
+        "price": 5.5,
+        "photo_url": "https://www.dfordog.co.uk/user/products/large/hawaiian-dog-shirt-blue-oasis.jpg"
     }
 ]</code></pre>
                     </div>
@@ -409,10 +430,11 @@
                         <p><strong>Description:</strong> Retrieves details of a specific product. <strong>Authorization:</strong> No authentication required (public).</p>
                         <p><strong>Response:</strong></p>
                         <pre><code>{
-    "id": 1,
-    "name": "Dog Food",
-    "price": 19.99,
-    "description": "High quality dog food."
+    "title": "Dog T-Shirt",
+    "description": "A funny dog T-Shirt",
+    "quantity": 34,
+    "price": 5.5,
+    "photo_url": "https://www.dfordog.co.uk/user/products/large/hawaiian-dog-shirt-blue-oasis.jpg"
 }</code></pre>
                     </div>
                 </div>
@@ -425,10 +447,11 @@
                         <p><strong>Description:</strong> Allows admins to add a new product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
                         <p><strong>Request Body:</strong></p>
                         <pre><code>{
-    "name": "Product Name",
-    "price": 19.99,
-    "description": "Product Description",
-    "quantity": 100
+    "title": "Dog T-Shirt",
+    "description": "A funny dog T-Shirt",
+    "quantity": 34,
+    "price": 5.5,
+    "photo_url": "https://www.dfordog.co.uk/user/products/large/hawaiian-dog-shirt-blue-oasis.jpg"
 }</code></pre>
                         <p><strong>Response:</strong></p>
                         <pre><code>{
@@ -445,7 +468,7 @@
                         <p><strong>Description:</strong> Allows admins to edit a product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
                         <p><strong>Request Body:</strong></p>
                         <pre><code>{
-    "name": "Updated Product Name",
+    "title": "Updated Product Name",
     "price": 25.99
 }</code></pre>
                         <p><strong>Response:</strong></p>
