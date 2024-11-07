@@ -14,55 +14,151 @@
 <!-- DESCRIPTION -->
 ## Description
 
-The PetCare API is a comprehensive platform designed to help users manage their pets, products, and orders. It provides a set of RESTful endpoints to facilitate user registration, authentication, and the management of pets, products, and orders. The API is structured into three main categories based on authorization levels: Public, Authenticated Users, and Admin.
+# PetCare API Documentation
 
-Key Features:
-User Management:
+## Project Overview
 
-Users can register and log in to access personalized features.
-Authenticated users can update their passwords.
-Pet Management:
+The **PetCare API** is a comprehensive platform designed to help users manage their pets, products, and orders. It provides a set of RESTful endpoints to facilitate user registration, authentication, and the management of pets, products, and orders. The API is structured into three main categories based on authorization levels: **Public**, **Authenticated Users**, and **Admin**.
 
-Authenticated users can add, view, edit, and delete their pets.
-Admin users have additional privileges to view and manage all pets in the system.
-Product Management:
+### Key Features:
+- **User Management**: Register, login, and change passwords.
+- **Pet Management**: Add, view, edit, and delete pets.
+- **Product Management**: View products and manage product details (Admin).
+- **Order Management**: Place and manage product orders.
+- **Vet Appointment Booking** *(Coming Soon)*: Schedule vet appointments for pets.
 
-Users can view all available products, as well as details about specific products.
-Admin users can add, edit, and delete products.
-Order Management:
+## API Structure
 
-Authenticated users can place orders for products. These orders are linked to the user’s account.
-Vet Appointment Booking (Coming Soon):
+The PetCare API is structured into different endpoints based on user authentication levels:
 
-Soon, users will be able to schedule appointments for their pets with veterinarians, making it easier for pet owners to ensure the health and well-being of their pets.
-API Structure:
-Public Endpoints: Available to everyone (no authentication required).
+### Public Endpoints
+Accessible to all users (no authentication required):
+- `POST /register` - Register a new user.
+- `POST /login` - Log in to the API to obtain an authentication token.
+- `GET /about` - Retrieve information about the API.
+- `GET /products` - View a list of all products.
+- `GET /products/{product_id}` - View details of a specific product.
 
-POST /register - Register a new user.
-POST /login - Log in a user to obtain an authentication token.
-GET /about - Retrieve information about the API.
-GET /products - View a list of all products.
-GET /products/{product_id} - View details of a specific product.
-Authenticated User Endpoints: Available only to users who are logged in (authentication required via JWT token).
+### Authenticated User Endpoints
+Accessible only to authenticated users (via JWT token):
+- `POST /pets/add_pet` - Add a new pet to the user’s account.
+- `GET /pets` - Retrieve a list of the user’s pets.
+- `POST /orders/place_order` - Place an order for products.
+- `POST /users/change_password` - Change the user's password.
 
-POST /pets/add_pet - Add a new pet to the user’s account.
-GET /pets - Retrieve a list of the user’s pets.
-POST /orders/place_order - Place an order for products.
-POST /users/change_password - Change the user's password.
-Admin Endpoints: Restricted to users with admin roles.
+### Admin Endpoints
+Restricted to users with admin roles:
+- `POST /products/add_product` - Add a new product to the system.
+- `POST /products/edit_product/{product_id}` - Edit an existing product.
+- `POST /products/delete_product/{product_id}` - Remove a product from the system.
+- `GET /pets` - Admins can view all pets in the system (not just their own).
 
-POST /products/add_product - Add a new product to the system.
-POST /products/edit_product/{product_id} - Edit the details of an existing product.
-POST /products/delete_product/{product_id} - Remove a product from the system.
-GET /pets - Admins can view all pets in the system, not just those belonging to them.
-Future Enhancements:
-In the upcoming update, the PetCare API will introduce an endpoint for booking vet appointments. This feature will allow users to schedule appointments for their pets with certified veterinarians, ensuring that their pets receive necessary care and health check-ups.
+## Upcoming Features
+- **Vet Appointment Booking**: In a future update, users will be able to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
 
-This feature will further enrich the API by integrating pet care management into one centralized platform, providing pet owners with seamless access to essential services like appointments, product orders, and health tracking.
+## Getting Started
 
-Conclusion:
-The PetCare API is a powerful tool for managing pets, products, and orders, with easy access for both regular users and administrators. With the upcoming addition of the vet appointment booking feature, it will become an even more indispensable service for pet owners, ensuring that their pets live long, healthy lives.
+### Prerequisites
 
+- **Python 3.8+** and **pip** for managing dependencies.
+- **Flask** or any compatible Python web framework.
+- **JWT** for user authentication.
+
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/your-username/petcare-api.git
+    cd petcare-api
+    ```
+
+2. Install the dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. Run the application:
+
+    ```bash
+    python app.py
+    ```
+
+### Usage
+
+- **Register a new user**:
+
+    ```bash
+    POST /register
+    ```
+
+    Request body example:
+
+    ```json
+    {
+        "email": "user@example.com",
+        "password": "SecurePassword123"
+    }
+    ```
+
+- **Login** to get a JWT token:
+
+    ```bash
+    POST /login
+    ```
+
+    Request body example:
+
+    ```json
+    {
+        "email": "user@example.com",
+        "password": "SecurePassword123"
+    }
+    ```
+
+    Response:
+
+    ```json
+    {
+        "access_token": "your_jwt_token"
+    }
+    ```
+
+- **Add a new pet** (Authenticated users only):
+
+    ```bash
+    POST /pets/add_pet
+    ```
+
+    Request body example:
+
+    ```json
+    {
+        "name": "Buddy",
+        "gender": "Male",
+        "pet_type": "Dog",
+        "breed": "Golden Retriever",
+        "is_stray": false,
+        "microchip_id": "1234567890"
+    }
+    ```
+
+- **Place an order** (Authenticated users only):
+
+    ```bash
+    POST /orders/place_order
+    ```
+
+    Request body example:
+
+    ```json
+    {
+        "product_id": 1,
+        "quantity": 2,
+        "address": "123 Main St, City, Country"
+    }
+    ```
 
 <!-- INSTALLATION -->
 ## Installation
@@ -219,3 +315,11 @@ This endpoint renders the template - (GetDocumentationPage, "/"),  # everyone ca
 - [ ] Full front end application with React
 - [ ] Add more 3th service integrations
 - [ ] Add endpoints to book an appointment for your pet/s
+
+
+<!-- License -->
+## License
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
