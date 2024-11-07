@@ -16,6 +16,7 @@ class AddProduct(Resource):
     This endpoint allows an authenticated user with admin permissions to add a new product to the system.
     The product details are returned in the response.
     """
+
     @auth.login_required
     @permission_required(RoleType.admin)
     @validate_schema(ProductRequestSchema)
@@ -43,6 +44,7 @@ class GetProducts(Resource):
 
     This endpoint allows anyone (no authentication required) to fetch a list of all products in the system.
     """
+
     def get(self):
         """
         Retrieves a list of all products.
@@ -66,6 +68,7 @@ class GetProduct(Resource):
 
     This endpoint allows an authenticated user to fetch a specific product by providing its ID.
     """
+
     @auth.login_required
     def get(self, product_id):
         """
@@ -81,7 +84,7 @@ class GetProduct(Resource):
             int: HTTP status code 201 indicating the request was successful.
         """
         product = ProductManager.get_product(product_id)
-        return ProductResponseSchema().dump(product), 201
+        return ProductResponseSchema().dump(product), 200
 
 
 class EditProduct(Resource):
@@ -90,6 +93,7 @@ class EditProduct(Resource):
 
     This endpoint allows an authenticated user with admin permissions to edit the details of a specific product.
     """
+
     @auth.login_required
     @permission_required(RoleType.admin)
     def put(self, product_id):
@@ -116,6 +120,7 @@ class DeleteProduct(Resource):
 
     This endpoint allows an authenticated user with admin permissions to delete a specific product from the system.
     """
+
     @auth.login_required
     @permission_required(RoleType.admin)
     def delete(self, product_id):

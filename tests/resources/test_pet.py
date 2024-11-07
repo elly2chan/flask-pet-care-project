@@ -22,10 +22,10 @@ def login_data():
 
 
 @pytest.mark.parametrize('endpoint, method, status_code', [
-    ('/pets/add_pet', 'post', 201),  # Add Pet
-    ('/pets', 'get', 200),  # Get Pets
-    ('/pets/edit_pet/1', 'put', 204),  # Edit Pet
-    ('/pets/delete_pet/1', 'delete', 204)  # Delete Pet
+    ('/pets/add_pet', 'post', 201),  # Add pet
+    ('/pets', 'get', 200),  # Get pets
+    ('/pets/edit_pet/1', 'put', 204),  # Edit pet
+    ('/pets/delete_pet/1', 'delete', 204)  # Delete pet
 ])
 def test_pets(client, database, endpoint, method, status_code):
     """
@@ -40,28 +40,28 @@ def test_pets(client, database, endpoint, method, status_code):
     token = login_response.json["token"]
     headers = {"Authorization": f"Bearer {token}"}
 
-    # Test POST (Add Pet)
+    # Test POST (Add pet)
     if method == 'post':
         pet_data = {
             "name": "Buddy",
-            "pet_type": PetType.dog.name,  # Pass the enum itself, not the name or value
+            "pet_type": PetType.dog.name,
             "breed": "Labrador",
-            "gender": Gender.male.name,  # Pass the enum itself, not the name or value
+            "gender": Gender.male.name,
             "date_of_birth": "2024-07-28"
         }
         response = client.post(endpoint, json=pet_data, headers=headers)
         print(response)
 
-    # Test GET (Get Pets)
+    # Test GET (Get pets)
     elif method == 'get':
-        PetFactory(owner_id=user.id, owner_email=user.email)  # Create a pet for the user
+        PetFactory(owner_id=user.id, owner_email=user.email)
         response = client.get(endpoint, headers=headers)
         assert response.status_code == status_code
         assert len(response.json) > 0
 
-    # Test PUT (Edit Pet)
+    # Test PUT (Edit pet)
     elif method == 'put':
-        pet = PetFactory(owner_id=user.id, owner_email=user.email)  # Create a pet to edit
+        pet = PetFactory(owner_id=user.id, owner_email=user.email)
         pet_data = {
             "name": "Max",
             "species": "Dog",
@@ -73,9 +73,9 @@ def test_pets(client, database, endpoint, method, status_code):
         updated_pet = PetModel.query.get(pet.id)
         assert updated_pet.name == "Max"
 
-    # Test DELETE (Delete Pet)
+    # Test DELETE (Delete pet)
     elif method == 'delete':
-        pet = PetFactory(owner_id=user.id, owner_email=user.email)  # Create a pet to delete
+        pet = PetFactory(owner_id=user.id, owner_email=user.email)
         response = client.delete(f"/pets/delete_pet/{pet.id}", headers=headers)
         assert response.json == status_code
         deleted_pet = PetModel.query.get(pet.id)
