@@ -31,7 +31,7 @@ The PetCare API is structured into different endpoints based on user authenticat
 Accessible to all users (no authentication required):
 - `POST /register` - Register a new user.
 - `POST /login` - Log in to the API to obtain an authentication token.
-- `GET /documentation` - Retrieve API documentation about the project.
+- `GET /` - Retrieve API documentation about the project.
 - `GET /products` - View a list of all products.
 - `GET /products/{product_id}` - View details of a specific product.
 
