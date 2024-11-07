@@ -19,7 +19,7 @@ routes = (
     (RegisterUser, "/register"),  # everyone can register
     (LoginUser, "/login"),  # everyone can log in
     (ChangePassword, "/users/change_password"),
-    (GetDocumentationPage, "/"),  # everyone can see about page (public)
+    (GetDocumentationPage, "/"),  # everyone can see the documentation page (public)
     (AddPet, "/pets/add_pet"),  # only authenticated users can add pets
     (GetPets, "/pets"),  # only authenticated users can see their pets, admins can see all pets
     (EditPet, "/pets/edit_pet/<int:pet_id>"),  # only authenticated users can edit pets, admins can edit all
