@@ -5,14 +5,64 @@
 </a>
 <p>
 <br><br>
-<h1 align=center>Pet Files</h1>
+<h1 align=center>PetCare</h1>
 <h3 align=center>
-Flask Rest API project that could be used by veterinary clinics to keep track of all registered pets. <br>
-Final project for the Web Applicatons with Flask course in Software University. <br>
-<br>
 </div>
 
 [Description](#description) | [Installation](#installation) | [Endpoints](#endpoints) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Future Functionalities](#future-functionalities)
+
+<!-- DESCRIPTION -->
+## Description
+
+The PetCare API is a comprehensive platform designed to help users manage their pets, products, and orders. It provides a set of RESTful endpoints to facilitate user registration, authentication, and the management of pets, products, and orders. The API is structured into three main categories based on authorization levels: Public, Authenticated Users, and Admin.
+
+Key Features:
+User Management:
+
+Users can register and log in to access personalized features.
+Authenticated users can update their passwords.
+Pet Management:
+
+Authenticated users can add, view, edit, and delete their pets.
+Admin users have additional privileges to view and manage all pets in the system.
+Product Management:
+
+Users can view all available products, as well as details about specific products.
+Admin users can add, edit, and delete products.
+Order Management:
+
+Authenticated users can place orders for products. These orders are linked to the user’s account.
+Vet Appointment Booking (Coming Soon):
+
+Soon, users will be able to schedule appointments for their pets with veterinarians, making it easier for pet owners to ensure the health and well-being of their pets.
+API Structure:
+Public Endpoints: Available to everyone (no authentication required).
+
+POST /register - Register a new user.
+POST /login - Log in a user to obtain an authentication token.
+GET /about - Retrieve information about the API.
+GET /products - View a list of all products.
+GET /products/{product_id} - View details of a specific product.
+Authenticated User Endpoints: Available only to users who are logged in (authentication required via JWT token).
+
+POST /pets/add_pet - Add a new pet to the user’s account.
+GET /pets - Retrieve a list of the user’s pets.
+POST /orders/place_order - Place an order for products.
+POST /users/change_password - Change the user's password.
+Admin Endpoints: Restricted to users with admin roles.
+
+POST /products/add_product - Add a new product to the system.
+POST /products/edit_product/{product_id} - Edit the details of an existing product.
+POST /products/delete_product/{product_id} - Remove a product from the system.
+GET /pets - Admins can view all pets in the system, not just those belonging to them.
+Future Enhancements:
+In the upcoming update, the PetCare API will introduce an endpoint for booking vet appointments. This feature will allow users to schedule appointments for their pets with certified veterinarians, ensuring that their pets receive necessary care and health check-ups.
+
+This feature will further enrich the API by integrating pet care management into one centralized platform, providing pet owners with seamless access to essential services like appointments, product orders, and health tracking.
+
+Conclusion:
+The PetCare API is a powerful tool for managing pets, products, and orders, with easy access for both regular users and administrators. With the upcoming addition of the vet appointment booking feature, it will become an even more indispensable service for pet owners, ensuring that their pets live long, healthy lives.
+
 
 <!-- INSTALLATION -->
 ## Installation
@@ -68,7 +118,7 @@ routes = (
     (RegisterUser, "/register"),  # everyone can register
     (LoginUser, "/login"),  # everyone can log in
     (ChangePassword, "/users/change_password"),
-    (GetAboutPage, "/about"),  # everyone can see about page (public)
+    (GetDocumentationPage, "/"),  # everyone can see the documentation page (public)
     (AddPet, "/pets/add_pet"),  # only authenticated users can add pets
     (GetPets, "/pets"),  # only authenticated users can see their pets, admins can see all pets
     (EditPet, "/pets/edit_pet/<int:pet_id>"),  # only authenticated users can edit pets, admins can edit all
@@ -115,6 +165,10 @@ routes = (
     (PlaceOrder, "/orders/place_order")
 ```
 
+All of the endpoints with example data and description that includes what kind of authorizations are needed, can be seen when you run the server.
+This endpoint renders the template - (GetDocumentationPage, "/"),  # everyone can see the documentation page (public).
+
+
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -136,7 +190,7 @@ routes = (
 - [X] All third-party libraries/packages should be listed in requirements.txt file in the root folder of the project with their versions
 - [X] For database credentials or other secret keys and data you should use environment variables which are not committed in the repo (or hardcoded in the code) (10 points)
 - [X] Gitignore file is mandatory to exclude all sensitive data, caches and etc. (5 points)
-- [ ] At least one page of good described ReadMe file (should include how to install the dependencies, what are the endpoints, which are protected, what they return and what are the conditions to access them, the description of the project itself, future functionality) (5 points)
+- [X] At least one page of good described ReadMe file (should include how to install the dependencies, what are the endpoints, which are protected, what they return and what are the conditions to access them, the description of the project itself, future functionality) (5 points)
 - [X] At least one migration (up to 10 points – each migration is 2 points)
 - [X] Tests (30 points)
 - [X] At least 5 meaningful commits
@@ -149,7 +203,7 @@ routes = (
 <!-- BONUSES -->
 ## Bonuses
 
-- [ ] Write tests for at least 60% coverage on your business logic
+- [X] Write tests for at least 60% coverage on your business logic
 - [ ] Deployment
 - [ ] CI or CD (with GitHub actions or Jenkins)
 - [ ] Documentation / Swagger
