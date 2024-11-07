@@ -14,16 +14,12 @@
 <!-- DESCRIPTION -->
 ## Description
 
-
-
-## Project Overview
-
 The **PetCare API** is a comprehensive platform designed to help users manage their pets, products, and orders. It provides a set of RESTful endpoints to facilitate user registration, authentication, and the management of pets, products, and orders. The API is structured into three main categories based on authorization levels: **Public**, **Authenticated Users**, and **Admin**.
 
 ### Key Features:
 - **User Management**: Register, login, and change passwords.
 - **Pet Management**: Add, view, edit, and delete pets.
-- **Product Management**: View products and manage product details (Admin).
+- **Product Management**: View products (public) and manage product details (admin).
 - **Order Management**: Place and manage product orders.
 - **Vet Appointment Booking** *(Coming Soon)*: Schedule vet appointments for pets.
 
@@ -35,7 +31,7 @@ The PetCare API is structured into different endpoints based on user authenticat
 Accessible to all users (no authentication required):
 - `POST /register` - Register a new user.
 - `POST /login` - Log in to the API to obtain an authentication token.
-- `GET /about` - Retrieve information about the API.
+- `GET /documentation` - Retrieve API documentation about the project.
 - `GET /products` - View a list of all products.
 - `GET /products/{product_id}` - View details of a specific product.
 
@@ -56,109 +52,6 @@ Restricted to users with admin roles:
 ## Upcoming Features
 - **Vet Appointment Booking**: In a future update, users will be able to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
 
-## Getting Started
-
-### Prerequisites
-
-- **Python 3.8+** and **pip** for managing dependencies.
-- **Flask** or any compatible Python web framework.
-- **JWT** for user authentication.
-
-### Installation
-
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/your-username/petcare-api.git
-    cd petcare-api
-    ```
-
-2. Install the dependencies:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. Run the application:
-
-    ```bash
-    python app.py
-    ```
-
-### Usage
-
-- **Register a new user**:
-
-    ```bash
-    POST /register
-    ```
-
-    Request body example:
-
-    ```json
-    {
-        "email": "user@example.com",
-        "password": "SecurePassword123"
-    }
-    ```
-
-- **Login** to get a JWT token:
-
-    ```bash
-    POST /login
-    ```
-
-    Request body example:
-
-    ```json
-    {
-        "email": "user@example.com",
-        "password": "SecurePassword123"
-    }
-    ```
-
-    Response:
-
-    ```json
-    {
-        "access_token": "your_jwt_token"
-    }
-    ```
-
-- **Add a new pet** (Authenticated users only):
-
-    ```bash
-    POST /pets/add_pet
-    ```
-
-    Request body example:
-
-    ```json
-    {
-        "name": "Buddy",
-        "gender": "Male",
-        "pet_type": "Dog",
-        "breed": "Golden Retriever",
-        "is_stray": false,
-        "microchip_id": "1234567890"
-    }
-    ```
-
-- **Place an order** (Authenticated users only):
-
-    ```bash
-    POST /orders/place_order
-    ```
-
-    Request body example:
-
-    ```json
-    {
-        "product_id": 1,
-        "quantity": 2,
-        "address": "123 Main St, City, Country"
-    }
-    ```
 
 <!-- INSTALLATION -->
 ## Installation
