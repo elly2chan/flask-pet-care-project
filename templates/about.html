@@ -3,90 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Project About - Documentation</title>
+    <title>Project API Documentation</title>
+
+    <!-- External CSS (Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+
     <style>
+        /* Global Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
             color: #333;
+            background-color: #f8f8f8;
+            display: grid;
+            justify-items: center;
+            padding-top: 40px;
         }
-        header {
-            background-color: #0b3d91;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
+
+        h1, h2, h3 {
             margin: 0;
         }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 960px;  /* Restrict width to 960px */
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 3px solid #ddd;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: #333;
+            margin-top: 50px; /* Add spacing from top */
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Section */
         section {
-            padding: 30px 50px;
+            padding: 40px 0;
         }
+
         h2 {
-            color: #0b3d91;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
         }
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        ul li {
-            margin: 5px 0;
-        }
-        .section-content {
-            display: none;
-        }
-        .section-content.active {
-            display: block;
-        }
-        .btn-toggle {
-            background-color: #0b3d91;
-            color: white;
-            border: none;
-            padding: 10px 15px;
+
+        /* Collapsible Section */
+        .collapsible {
+            background-color: #ddd;
+            color: #444;
             cursor: pointer;
-            font-size: 1em;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            font-size: 18px;
+            border-radius: 8px;
+            margin: 10px 0;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .collapsible:hover {
+            background-color: #bbb;
+            transform: translateY(-3px);
+        }
+
+        .active, .collapsible:active {
+            background-color: #999;
+        }
+
+        .content {
+            padding: 10px 20px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+            border-left: 4px solid #ff6600;
+            border-radius: 8px;
             margin-top: 10px;
         }
-        .btn-toggle:hover {
-            background-color: #005aa7;
-        }
-        .api-call {
-            background-color: #f8f9fa;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        .api-call pre {
-            margin: 0;
-            font-size: 1.1em;
-            background-color: #f1f1f1;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .api-call p {
-            font-weight: bold;
-        }
-        .api-doc {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        .endpoint {
+            margin-bottom: 20px;
             padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            border-left: 5px solid #ff6600;
         }
+
+        .endpoint h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .endpoint p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Footer */
         footer {
-            background-color: #333;
-            color: white;
             text-align: center;
             padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+            width: 100%;
             position: fixed;
             bottom: 0;
-            width: 100%;
+        }
+
+        footer a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .endpoint h3 {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -94,137 +171,257 @@
 
     <header>
         <h1>Project API Documentation</h1>
-        <p>Learn how to use the system's API and integrate it into your projects</p>
+        <p>Your one-stop documentation for managing users, pets, products, and orders.</p>
     </header>
 
-    <section id="overview">
-        <h2>Project Overview</h2>
-        <p>This project is an API service that provides various functionalities including user management, pet management, product catalog, and order placement.</p>
-        <p>Below you will find the details of the available API endpoints and how to interact with the system. You can register, log in, manage pets, manage products, and place orders using these endpoints.</p>
-        <button class="btn-toggle" onclick="toggleSection('overview')">Read More</button>
-        <div class="section-content" id="overview-content">
-            <p>The API uses JWT (JSON Web Tokens) for user authentication and authorization. The main components of the system are:</p>
-            <ul>
-                <li>User Registration and Authentication</li>
-                <li>Pet Management (Add, Edit, Delete Pets)</li>
-                <li>Product Catalog (View, Add, Edit, Delete Products)</li>
-                <li>Order Management (Place Orders)</li>
-            </ul>
-        </div>
-    </section>
+    <div class="container">
 
-    <section id="api-doc">
-        <h2>API Documentation</h2>
-        <div class="api-doc">
-            <h3>Authentication</h3>
-            <div class="api-call">
-                <p><strong>POST /login</strong> - Login an existing user</p>
-                <pre>
-POST /login
-Content-Type: application/json
-{
+        <!-- API Documentation -->
+
+        <section>
+            <h2>Available Endpoints</h2>
+
+            <!-- user Endpoints -->
+            <button class="collapsible">User Endpoints</button>
+            <div class="content">
+
+                <!-- Register User -->
+                <button class="collapsible">POST /register - Register a User</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /register</h3>
+                        <p><strong>Description:</strong> Registers a new user. <strong>Authorization:</strong> No authentication required (public).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
     "email": "user@example.com",
-    "password": "your_password"
-}
-                </pre>
+    "password": "SecurePassword123",
+    "first_name": "John",
+    "last_name": "Doe",
+    "phone": "1234567890",
+    "iban": "DE89370400440532013000"
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "User registered successfully"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Login User -->
+                <button class="collapsible">POST /login - Log in a User</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /login</h3>
+                        <p><strong>Description:</strong> Authenticates a user and returns a token. <strong>Authorization:</strong> No authentication required (public).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "email": "user@example.com",
+    "password": "SecurePassword123"
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "token": "JWT-TOKEN"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Change Password -->
+                <button class="collapsible">POST /users/change_password - Change Password</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /users/change_password</h3>
+                        <p><strong>Description:</strong> Changes the password of the authenticated user. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "current_password": "OldPassword123",
+    "new_password": "NewSecurePassword123"
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Password changed successfully"
+}</code></pre>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="api-call">
-                <p><strong>POST /register</strong> - Register a new user</p>
-                <pre>
-POST /register
-Content-Type: application/json
-{
-    "username": "newuser",
-    "email": "newuser@example.com",
-    "password": "your_password"
-}
-                </pre>
+            <!-- pet Endpoints -->
+            <button class="collapsible">Pet Endpoints</button>
+            <div class="content">
+
+                <!-- Add Pet -->
+                <button class="collapsible">POST /pets/add_pet - Add a Pet</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /pets/add_pet</h3>
+                        <p><strong>Description:</strong> Adds a new pet for the authenticated user. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "name": "Rex",
+    "species": "Dog",
+    "age": 3
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Pet added successfully"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Get Pets -->
+                <button class="collapsible">GET /pets - Get Pets</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>GET /pets</h3>
+                        <p><strong>Description:</strong> Retrieves all pets of the authenticated user. Admins can see all pets. <strong>Authorization:</strong> Requires authentication (JWT token), admin can view all pets.</p>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>[
+    {
+        "id": 1,
+        "name": "Rex",
+        "species": "Dog",
+        "age": 3
+    }
+]</code></pre>
+                    </div>
+                </div>
+
+                <!-- Edit Pet -->
+                <button class="collapsible">PUT /pets/edit_pet/{pet_id} - Edit a Pet</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>PUT /pets/edit_pet/{pet_id}</h3>
+                        <p><strong>Description:</strong> Edits the details of a specific pet. Admins can edit any pet. <strong>Authorization:</strong> Requires authentication (JWT token), admin can edit any pet.</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "name": "Rexy",
+    "species": "Dog",
+    "age": 4
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Pet updated successfully"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Delete Pet -->
+                <button class="collapsible">DELETE /pets/delete_pet/{pet_id} - Delete a Pet</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>DELETE /pets/delete_pet/{pet_id}</h3>
+                        <p><strong>Description:</strong> Deletes a specific pet. Admins can delete any pet. <strong>Authorization:</strong> Requires authentication (JWT token), admin can delete any pet.</p>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Pet deleted successfully"
+}</code></pre>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="api-call">
-                <p><strong>POST /users/change_password</strong> - Change your password</p>
-                <pre>
-POST /users/change_password
-Authorization: Bearer <your_token>
-Content-Type: application/json
-{
-    "old_password": "oldpassword",
-    "new_password": "newpassword"
-}
-                </pre>
-            </div>
+            <!-- order Endpoints -->
+            <button class="collapsible">Order Endpoints</button>
+            <div class="content">
 
-            <h3>Pet Management</h3>
-            <div class="api-call">
-                <p><strong>POST /pets/add_pet</strong> - Add a new pet</p>
-                <pre>
-POST /pets/add_pet
-Authorization: Bearer <your_token>
-Content-Type: application/json
-{
-    "name": "Fluffy",
-    "species": "Cat",
-    "age": 2
-}
-                </pre>
-            </div>
-
-            <div class="api-call">
-                <p><strong>GET /pets</strong> - Retrieve all pets</p>
-                <pre>
-GET /pets
-Authorization: Bearer <your_token>
-                </pre>
-            </div>
-
-            <h3>Product Management</h3>
-            <div class="api-call">
-                <p><strong>POST /products/add_product</strong> - Add a new product</p>
-                <pre>
-POST /products/add_product
-Authorization: Bearer <your_token>
-Content-Type: application/json
-{
-    "name": "Pet Shampoo",
-    "price": 10.99,
-    "description": "Shampoo for your pets"
-}
-                </pre>
-            </div>
-
-            <div class="api-call">
-                <p><strong>GET /products</strong> - Retrieve all products</p>
-                <pre>
-GET /products
-                </pre>
-            </div>
-
-            <h3>Order Management</h3>
-            <div class="api-call">
-                <p><strong>POST /orders/place_order</strong> - Place an order</p>
-                <pre>
-POST /orders/place_order
-Authorization: Bearer <your_token>
-Content-Type: application/json
-{
+                <!-- Place Order -->
+                <button class="collapsible">POST /orders/place_order - Place an Order</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /orders/place_order</h3>
+                        <p><strong>Description:</strong> Allows authenticated users to place an order. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
     "product_id": 1,
     "quantity": 2
-}
-                </pre>
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Order placed successfully"
+}</code></pre>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </section>
+
+            <!-- product Endpoints -->
+            <button class="collapsible">Product Endpoints</button>
+            <div class="content">
+
+                <!-- Add Product -->
+                <button class="collapsible">POST /products/add_product - Add a Product</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /products/add_product</h3>
+                        <p><strong>Description:</strong> Allows admins to add a new product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "name": "Product Name",
+    "price": 19.99,
+    "description": "Product Description",
+    "quantity": 100
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Product added successfully"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Edit Product -->
+                <button class="collapsible">PUT /products/edit_product/{product_id} - Edit a Product</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>PUT /products/edit_product/{product_id}</h3>
+                        <p><strong>Description:</strong> Allows admins to edit a product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "name": "Updated Product Name",
+    "price": 25.99
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Product updated successfully"
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Delete Product -->
+                <button class="collapsible">DELETE /products/delete_product/{product_id} - Delete a Product</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>DELETE /products/delete_product/{product_id}</h3>
+                        <p><strong>Description:</strong> Allows admins to delete a product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Product deleted successfully"
+}</code></pre>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
 
     <footer>
-        <p>&copy; 2024 Project Name | All rights reserved</p>
+        <p>Created by <a href="https://github.com/elly2chan" target="_blank">Elena Konstantinova</a> - 2024</p>
     </footer>
 
+    <!-- Collapsible script -->
     <script>
-        // Toggle visibility for sections
-        function toggleSection(sectionId) {
-            const section = document.getElementById(`${sectionId}-content`);
-            section.classList.toggle('active');
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
         }
     </script>
 
