@@ -2,14 +2,13 @@ from flask import render_template, make_response
 from flask_restful import Resource
 
 
-class GetAboutPage(Resource):
+class GetDocumentationPage(Resource):
     def get(self):
         """
-        Renders and returns the 'About' page.
+        Renders and returns the 'Documentation' page.
 
-        This endpoint serves the 'about.html' page, typically containing information
-        about the application or organization.
+        This endpoint serves the 'documentation.html' page that contains the API documentation for the project.
 
-        :return: rendered 'about.html' page
+        :return: rendered 'documentation.html' page
         """
-        return make_response(render_template('about.html'))
+        return make_response(render_template('documentation.html'))

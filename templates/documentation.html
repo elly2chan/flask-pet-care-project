@@ -348,6 +348,46 @@
             <button class="collapsible">Product Endpoints</button>
             <div class="content">
 
+                <!-- Get Products -->
+                <button class="collapsible">GET /products - Get all Products</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>GET /products</h3>
+                        <p><strong>Description:</strong> Retrieves a list of all available products. <strong>Authorization:</strong> No authentication required (public).</p>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>[
+    {
+        "id": 1,
+        "name": "Dog Food",
+        "price": 19.99,
+        "description": "High quality dog food."
+    },
+    {
+        "id": 2,
+        "name": "Dog T-Shirt",
+        "price": 9.99,
+        "description": "Funny dog T-Shirt."
+    }
+]</code></pre>
+                    </div>
+                </div>
+
+                <!-- Get Product -->
+                <button class="collapsible">GET /products/{product_id} - Get a Product</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>GET /products/{product_id}</h3>
+                        <p><strong>Description:</strong> Retrieves details of a specific product. <strong>Authorization:</strong> No authentication required (public).</p>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "id": 1,
+    "name": "Dog Food",
+    "price": 19.99,
+    "description": "High quality dog food."
+}</code></pre>
+                    </div>
+                </div>
+
                 <!-- Add Product -->
                 <button class="collapsible">POST /products/add_product - Add a Product</button>
                 <div class="content">
