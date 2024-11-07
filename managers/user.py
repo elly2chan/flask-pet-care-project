@@ -11,7 +11,6 @@ class UserManager:
     @staticmethod
     def register(user_data):
         """Registers a new user."""
-
         hashed_password = generate_password_hash(user_data["password"], method="pbkdf2:sha256")
         user_data["password"] = hashed_password
         user_data["role"] = RoleType.user.name
@@ -27,7 +26,6 @@ class UserManager:
     @staticmethod
     def login(data):
         """Logs in a user."""
-
         user = db.session.execute(db.select(UserModel).filter_by(email=data["email"])).scalar()
 
         if not user:

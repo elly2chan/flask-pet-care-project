@@ -12,7 +12,6 @@ class PetManager:
     @staticmethod
     def add_pet(user, data):
         """Adds a new pet to the database."""
-
         data["owner_id"] = user.id
         data["owner_email"] = user.email
 
@@ -20,7 +19,7 @@ class PetManager:
             try:
                 data['date_of_birth'] = datetime.strptime(data['date_of_birth'], "%Y-%m-%d").date()
             except ValueError as e:
-                raise ValueError(f"Error parsing date_of_birth: {e}.")
+                raise ValueError(f"Error parsing date_of_birth: {e}")
         elif not isinstance(data['date_of_birth'], datetime):
             raise ValueError("date_of_birth must be a string or a datetime object.")
 
@@ -40,7 +39,6 @@ class PetManager:
     @staticmethod
     def get_pets(user):
         """Fetches pets for the given user."""
-
         query = db.select(PetModel)
 
         if user.role != RoleType.admin.name:
@@ -54,6 +52,7 @@ class PetManager:
 
     @staticmethod
     def edit_pet(pet_id, user, data):
+        """Edits a pet."""
         pet = db.session.execute(db.select(PetModel).filter_by(id=pet_id)).scalar()
         if not pet:
             raise NotFound(f"Pet with ID {pet_id} not found.")
@@ -70,7 +69,6 @@ class PetManager:
     @staticmethod
     def delete_pet(pet_id, user):
         """Deletes a pet from the database."""
-
         pet = db.session.execute(db.select(PetModel).filter_by(id=pet_id)).scalar()
         if not pet:
             raise NotFound

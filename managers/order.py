@@ -1,4 +1,4 @@
-from werkzeug.exceptions import NotFound, InternalServerError
+from werkzeug.exceptions import NotFound, InternalServerError, BadRequest
 
 from db import db
 from managers.product import ProductManager
@@ -12,34 +12,36 @@ wise_service = WiseService()
 class OrderManager:
     @staticmethod
     def issue_transaction(amount, first_name, last_name, iban, order_id):
-        quote = wise_service.create_quote(amount)
-        recipient = wise_service.create_recipient(first_name, last_name, iban)
-        transfer = wise_service.create_transfer(recipient["id"], quote["id"])
-        transaction = TransactionModel(
-            quote_id=quote["id"],
-            transfer_id=transfer["id"],
-            target_account_id=recipient["id"],
-            amount=amount,
-            order_id=order_id,
-        )
-        db.session.add(transaction)
-        db.session.flush()
+        """Issues a transaction in Wise."""
+        try:
+            quote = wise_service.create_quote(amount)
+            recipient = wise_service.create_recipient(first_name, last_name, iban)
+            transfer = wise_service.create_transfer(recipient["id"], quote["id"])
+            transaction = TransactionModel(
+                quote_id=quote["id"],
+                transfer_id=transfer["id"],
+                target_account_id=recipient["id"],
+                amount=amount,
+                order_id=order_id,
+            )
+            db.session.add(transaction)
+            db.session.flush()
 
-        return transaction, transfer
+            return transaction, transfer
+        except Exception as e:
+            raise InternalServerError(f"Transaction failed: {str(e)}")
 
     @staticmethod
     def _calculate_total_price(product, quantity):
         """Calculates the total price based on product price and quantity."""
-        total_price = 0.0
+        if not product or quantity <= 0:
+            raise BadRequest("Invalid product or quantity.")
 
-        if product:
-            total_price = product.price * quantity
-        return total_price
+        return product.price * quantity
 
     @staticmethod
     def _get_order_or_404(order_id):
         """Helper function to get an order or raise NotFound."""
-
         order = db.session.execute(db.select(OrderModel)).filter_by(id=order_id).scalar()
         if not order:
             raise NotFound(f"Order with ID {order_id} not found.")
@@ -48,12 +50,11 @@ class OrderManager:
     @staticmethod
     def place_order(user, data):
         """Place an order by creating a new OrderModel instance."""
-
         data["customer_id"] = user.id
 
         product = db.session.execute(db.select(ProductModel).filter_by(id=data["product_id"])).scalar()
         if product is None:
-            raise Exception("Product not found.")
+            raise NotFound("Product not found.")
 
         data["product_title"] = product.title
 
