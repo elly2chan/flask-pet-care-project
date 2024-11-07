@@ -28,7 +28,7 @@ class RegisterUserRequestSchema(BaseUserSchema):
         'max_length': 'Phone number must be between 10 and 13 digits.'
     })
 
-    iban = fields.String(min_length=10, max_length=40, required=True, error_messages={
+    iban = fields.String(min_length=10, max_length=40, required=False, error_messages={
         'required': 'IBAN is required.',
         'min_length': 'IBAN must be between 10 and 13 digits.',
         'max_length': 'IBAN must be between 10 and 13 digits.'

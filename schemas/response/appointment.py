@@ -7,7 +7,7 @@ class AppointmentResponseSchema(Schema):
     """
 
     id = fields.Integer(required=True)
-    appointment_datetime = fields.DateTime(format="%Y-%m-%d %H:%M:%S")
+    appointment_datetime = fields.String(required=True)
     owner_id = fields.Integer(required=True)
     owner_name = fields.String(required=True)
     owner_phone = fields.String(required=True)

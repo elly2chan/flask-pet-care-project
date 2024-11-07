@@ -47,8 +47,12 @@ class EditPet(Resource):
         """
         data = request.get_json()
         user = auth.current_user()
-        PetManager.edit_pet(pet_id, user, data)
-        return 204
+
+        try:
+            PetManager.edit_pet(pet_id, user, data)
+            return 204
+        except ValueError as e:
+            return ({"message": str(e)}), 400
 
 
 class DeletePet(Resource):

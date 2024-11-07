@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from werkzeug.exceptions import Conflict
 
 from managers.appointment import AppointmentManager
 from managers.auth import auth
@@ -19,5 +20,9 @@ class BookAppointment(Resource):
         """
         user = auth.current_user()
         data = request.get_json()
-        appointment = AppointmentManager.book_appointment(user, data)
-        return AppointmentResponseSchema().dump(appointment), 201
+        try:
+            appointment = AppointmentManager.book_appointment(user, data)
+            return AppointmentResponseSchema().dump(appointment), 201
+        except Conflict as e:
+            # Handle the case where the appointment time is already taken
+            return {"message": str(e)}, 409

@@ -4,7 +4,7 @@ import jwt
 import pytz
 from decouple import config
 from flask_httpauth import HTTPTokenAuth
-from werkzeug.exceptions import Unauthorized
+from werkzeug.exceptions import Unauthorized, BadRequest, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from db import db
@@ -46,18 +46,27 @@ class AuthManager:
         """Changes the password for the current authenticated user."""
         try:
             if 'old_password' not in pass_data or 'new_password' not in pass_data:
-                raise ValueError('Both old and new passwords must be provided.')
+                raise BadRequest('Both old and new passwords must be provided.')
 
-            user = auth.current_user()
+            user = auth.current_user()  # Assuming the user is authenticated
 
+            # Check if the old password matches
             if not check_password_hash(user.password, pass_data['old_password']):
                 raise Unauthorized('Incorrect old password.')
 
+            # Generate hash for the new password and update it
             new_password_hash = generate_password_hash(pass_data['new_password'], method='pbkdf2:sha256')
             user.password = new_password_hash
-            db.session.flush()
+            db.session.flush()  # Persist changes
+            db.session.commit()  # Commit the changes to the database
+
+        except Unauthorized as e:
+            raise e  # Reraise Unauthorized to return 401 status
+        except BadRequest as e:
+            raise e  # Reraise BadRequest to return 400 status
         except Exception as e:
-            raise Exception(f'Password change failed: {e}')
+            # Catch all other exceptions and raise a 500 error
+            raise InternalServerError(f'Password change failed: {str(e)}')
 
 
 @auth.verify_token

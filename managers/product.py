@@ -36,8 +36,11 @@ class ProductManager:
         """Edits an existing product."""
         product = ProductManager._get_product_or_404(product_id)
 
+        valid_fields = {col.name for col in ProductModel.__table__.columns}
+
         for key, value in data.items():
-            setattr(product, key, value)
+            if key not in valid_fields:
+                raise ValueError(f"Invalid field: {key} is not a valid attribute.")
 
         db.session.add(product)
         db.session.flush()

@@ -16,7 +16,7 @@ class AppointmentRequestSchema(Schema):
     )
     appointment_reason = fields.String(
         required=True,
-        validate=validate.Length(min=10),
+        validate=validate.Length(min=5),
         error_messages={"required": "Appointment reason is required.",
-                        "min_length": "Reason must be at least 10 characters long."}
+                        "min_length": "Reason must be at least 5 characters long."}
     )

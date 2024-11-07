@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource
 
 from managers.auth import auth
@@ -40,7 +40,6 @@ class GetProducts(Resource):
 
 
 class GetProduct(Resource):
-    @auth.login_required
     def get(self, product_id):
         """
         Retrieves the details of a specific product.
@@ -67,8 +66,12 @@ class EditProduct(Resource):
         :return: HTTP status code 204 indicating the product was successfully updated.
         """
         data = request.get_json()
-        ProductManager.edit_product(product_id, data)
-        return 204
+
+        try:
+            ProductManager.edit_product(product_id, data)
+            return 204
+        except ValueError as e:
+            return ({"message": str(e)}), 400
 
 
 class DeleteProduct(Resource):

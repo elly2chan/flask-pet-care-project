@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flask import jsonify
-from werkzeug.exceptions import NotFound, Unauthorized
+from werkzeug.exceptions import NotFound, Unauthorized, BadRequest
 
 from db import db
 from models.enums import RoleType, Gender, PetType
@@ -14,6 +14,9 @@ class PetManager:
         """Adds a new pet to the database."""
         data["owner_id"] = user.id
         data["owner_email"] = user.email
+
+        if not "date_of_birth" in data:
+            raise BadRequest("You must provide a date of birth.")
 
         if isinstance(data['date_of_birth'], str):
             try:
@@ -58,7 +61,12 @@ class PetManager:
             raise NotFound(f"Pet with ID {pet_id} not found.")
 
         if user.role == RoleType.admin.name or pet.owner_id == user.id:
+            valid_fields = {col.name for col in PetModel.__table__.columns}
+
             for key, value in data.items():
+                if key not in valid_fields:
+                    raise ValueError(f"Invalid field: {key} is not a valid attribute.")
+
                 setattr(pet, key, value)
         else:
             raise Unauthorized("You do not have permission to edit this pet.")
