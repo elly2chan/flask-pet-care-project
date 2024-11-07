@@ -7,9 +7,9 @@
 <br><br>
 <h1 align=center>PetCare</h1>
 <h3 align=center>
-</div>
 
 [Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
+</div>
 
 <!-- DESCRIPTION -->
 ## Description
@@ -21,7 +21,7 @@ The **PetCare API** is a comprehensive platform designed to help users manage th
 - **Pet Management**: Add, view, edit, and delete pets.
 - **Product Management**: View products (public) and manage product details (admin).
 - **Order Management**: Place and manage product orders.
-- **Vet Appointment Booking** *(Coming Soon)*: Schedule vet appointments for pets.
+- **Vet Appointment Booking**: Schedule vet appointments for pets.
 
 ## API Structure
 
@@ -31,7 +31,7 @@ The PetCare API is structured into different endpoints based on user authenticat
 Accessible to all users (no authentication required):
 - `POST /register` - Register a new user.
 - `POST /login` - Log in to the API to obtain an authentication token.
-- `GET /documentation` - Retrieve API documentation about the project.
+- `GET /` - Retrieve API documentation about the project.
 - `GET /products` - View a list of all products.
 - `GET /products/{product_id}` - View details of a specific product.
 
@@ -41,6 +41,7 @@ Accessible only to authenticated users (via JWT token):
 - `GET /pets` - Retrieve a list of the user’s pets.
 - `POST /orders/place_order` - Place an order for products.
 - `POST /users/change_password` - Change the user's password.
+- `POST /appointments/book_appointment` - Book a vet appointment for a user's pet.
 
 ### Admin Endpoints
 Restricted to users with admin roles:
@@ -51,7 +52,7 @@ Restricted to users with admin roles:
 
 
 All of the endpoints with example data and description that includes what kind of authorizations are needed, can be seen when you run the server.
-This endpoint renders the template - (GetDocumentationPage, "/"),  # everyone can see the documentation page (public).
+This endpoint renders the template - (GetDocumentationPage, "/"). Everyone can see the documentation page. It is a public endpoint.
 
 
 <!-- INSTALLATION -->
@@ -136,7 +137,7 @@ WISE_PROFILE_ID = ""
 - [X] Write tests for at least 60% coverage on your business logic
 - [ ] Deployment
 - [ ] CI or CD (with GitHub actions or Jenkins)
-- [ ] Documentation / Swagger
+- [X] Documentation / Swagger (custom API documentation)
 - [X] Front end application (with framework like Angular, React VueJS or only vanilla JS) - partially, only one page is currently available
 - [ ] Different patterns with meaningful usage
 - [X] If the application is a creative app (something that helps you automate daily tasks, or we will be used by real users – your friends or family), something that solves an actual problem and has a potential to grow and be used
@@ -146,8 +147,7 @@ WISE_PROFILE_ID = ""
 <!-- UPCOMING FUNCTIONALITIES -->
 ## Upcoming Features
 
-- **Vet Appointment Booking**: In a future update, users will be able to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
-
+- **Add an option to look for closest vet clinics**: In a future update, users will be able to look for the closest vet clinic near them by providing an address. Then they can use the already existing functionality to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
 
 
 <!-- License -->
