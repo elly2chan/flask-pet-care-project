@@ -9,27 +9,13 @@ from utils.decorators import validate_schema
 
 
 class PlaceOrder(Resource):
-    """
-    Endpoint for placing a new order.
-
-    This endpoint allows an authenticated user to place a new order by providing the necessary order details.
-    The order will be processed and stored in the system. The order details are returned in the response.
-    """
-
     @auth.login_required
     @validate_schema(OrderRequestSchema)
     def post(self):
         """
-        Places a new order for the authenticated user.
+        Place a new order for the authenticated user.
 
-        Validates the incoming order request, processes the order, and returns the order details.
-
-        Args:
-            request: The incoming HTTP request containing the order data.
-
-        Returns:
-            dict: A dictionary containing the order details.
-            int: HTTP status code 201 indicating the order was successfully placed.
+        :return: dict with order details, status code 201
         """
         user = auth.current_user()
         data = request.get_json()

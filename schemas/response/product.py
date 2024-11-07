@@ -4,9 +4,7 @@ from schemas.base import BaseProductSchema
 
 
 class ProductResponseSchema(BaseProductSchema):
-    """
-    Schema for serializing a product response.
-    """
+    """Schema for serializing a product response."""
 
     title = fields.String(required=True)
     description = fields.String(required=True)

@@ -1,3 +1,14 @@
+"""
+Defines the API routes and maps them to their respective resources.
+
+Routes:
+- Public: RegisterUser, LoginUser, GetAboutPage, GetProducts, GetProduct
+- Authenticated: AddPet, GetPets, EditPet, DeletePet, PlaceOrder
+- Admin: AddProduct, EditProduct, DeleteProduct
+
+Each route corresponds to a specific resource handling the logic for that endpoint.
+"""
+
 from resources.auth import RegisterUser, LoginUser, ChangePassword
 from resources.order import PlaceOrder
 from resources.pet import AddPet, GetPets, EditPet, DeletePet

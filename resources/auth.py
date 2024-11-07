@@ -9,22 +9,12 @@ from utils.decorators import validate_schema
 
 
 class RegisterUser(Resource):
-    """
-    Endpoint for registering a new user.
-
-    This endpoint allows a user to register by providing their username, email, and password.
-    If successful, a token will be returned for the newly registered user.
-    """
     @validate_schema(RegisterUserRequestSchema)
     def post(self):
         """
-        Registers a new user.
+        Register a new user and return an authentication token.
 
-        Validates the incoming registration request, creates a new user, and returns an authentication token.
-
-        Returns:
-            dict: A dictionary containing the authentication token.
-            int: HTTP status code 201 for successful registration.
+        :return: dict with token, status code 201
         """
         data = request.get_json()
         token = UserManager.register(data)
@@ -32,20 +22,12 @@ class RegisterUser(Resource):
 
 
 class LoginUser(Resource):
-    """
-    Endpoint for logging in an existing user.
-
-    This endpoint allows a user to log in using their email and password. If successful, an authentication token will be returned.
-    """
     @validate_schema(LoginUserRequestSchema)
     def post(self):
         """
-        Logs in a user and returns an authentication token.
+        Log in an existing user and return an authentication token.
 
-        Validates the incoming login request, logs the user in, and returns an authentication token.
-
-        Returns:
-            dict: A dictionary containing the authentication token.
+        :return: dict with token
         """
         data = request.get_json()
         token = UserManager.login(data)
@@ -53,24 +35,13 @@ class LoginUser(Resource):
 
 
 class ChangePassword(Resource):
-    """
-    Endpoint for changing the password of the currently authenticated user.
-
-    This endpoint allows a user to change their password by providing their old and new passwords.
-    The user must be authenticated to access this endpoint.
-    """
     @auth.login_required
     @validate_schema(PasswordChangeRequestSchema)
     def post(self):
         """
-        Changes the password of the authenticated user.
+        Change the password of the authenticated user.
 
-        Validates the request, verifies the old password, updates the password with the new one,
-        and returns a success message.
-
-        Returns:
-            dict: A success message indicating the password change was successful.
-            int: HTTP status code 200 for successful password change.
+        :return: success message, status code 200
         """
         data = request.get_json()
         AuthManager.change_password(data)

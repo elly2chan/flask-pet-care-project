@@ -6,9 +6,7 @@ from schemas.base import BaseOrderSchema
 
 
 class OrderResponseSchema(BaseOrderSchema):
-    """
-    Schema for serializing order data in the response.
-    """
+    """Schema for serializing order data in the response."""
 
     id = fields.Integer(required=True)
     created_on = fields.DateTime(required=True)
