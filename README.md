@@ -7,9 +7,11 @@
 <br><br>
 <h1 align=center>PetCare</h1>
 <h3 align=center>
+
+[Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
 </div>
 
-<p align=center> [Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
+[Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
 
 <!-- DESCRIPTION -->
 ## Description
