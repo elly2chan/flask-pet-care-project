@@ -63,15 +63,12 @@ def test_pets(client, database, endpoint, method, status_code):
     elif method == 'put':
         pet = PetFactory(owner_id=user.id, owner_email=user.email)
         pet_data = {
-            "name": "Max",
-            "species": "Dog",
             "breed": "Bulldog",
-            "age": 4
         }
         response = client.put(f"/pets/edit_pet/{pet.id}", json=pet_data, headers=headers)
         assert response.json == status_code
         updated_pet = PetModel.query.get(pet.id)
-        assert updated_pet.name == "Max"
+        assert updated_pet.breed == "Bulldog"
 
     # Test DELETE (Delete pet)
     elif method == 'delete':

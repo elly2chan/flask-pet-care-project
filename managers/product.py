@@ -42,6 +42,8 @@ class ProductManager:
             if key not in valid_fields:
                 raise ValueError(f"Invalid field: {key} is not a valid attribute.")
 
+            setattr(product, key, value)
+
         db.session.add(product)
         db.session.flush()
 
