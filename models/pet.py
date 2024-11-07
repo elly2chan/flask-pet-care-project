@@ -9,23 +9,30 @@ from models.enums import Gender, PetType
 
 class PetModel(db.Model):
     """
-    Represents a pet owned by a user.
+    Represents a pet owned by a user in the system.
+
+    This model stores information about a pet, including its basic attributes (name, gender, date of birth),
+    as well as additional details such as the pet's breed, microchip ID, and ownership information. It allows
+    the system to track pets, whether they are stray, and if they have a European passport or a microchip.
 
     Attributes:
         id (int): The unique identifier for the pet.
         name (str): The name of the pet.
-        gender (Gender): The gender of the pet (either 'male' or 'female').
+        gender (Gender): The gender of the pet. Should be either 'male' or 'female'.
         date_of_birth (datetime.date): The pet's date of birth.
         breed (str): The breed of the pet.
         owner_id (int): The ID of the pet's owner (foreign key to the 'users' table).
         owner_email (str): The email of the pet's owner.
         pet_type (PetType): The type of pet (e.g., dog, cat).
-        is_stray (bool): Indicates if the pet is a stray (default is False).
-        european_passport (bool): Indicates if the pet has a European passport (default is False).
-        microchip (bool): Indicates if the pet has a microchip (default is False).
-        microchip_id (str): The microchip ID of the pet, if applicable.
-        added_on (datetime): The timestamp when the pet record was added (default is current time).
-        owner (UserModel): The pet's owner, represented by a relationship with the 'UserModel'.
+        is_stray (bool): Indicates whether the pet is a stray. Default is `False`.
+        european_passport (bool): Indicates whether the pet has a European passport. Default is `False`.
+        microchip (bool): Indicates whether the pet has a microchip. Default is `False`.
+        microchip_id (str): The unique microchip ID of the pet, if applicable.
+        added_on (datetime): The timestamp when the pet record was added to the system. Automatically set to the current time.
+        owner (UserModel): The pet's owner, represented by a relationship with the `UserModel`.
+
+    Relationships:
+        owner (UserModel): The user who owns the pet, referenced through a foreign key relationship.
     """
 
     __tablename__ = 'pets'

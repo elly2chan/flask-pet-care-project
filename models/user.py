@@ -8,15 +8,20 @@ class UserModel(db.Model):
     """
     Represents a user in the system.
 
+    This model contains user details including their personal information,
+    authentication credentials, role, and bank account (IBAN) information.
+
     Attributes:
         id (int): Unique identifier for the user (primary key).
-        email (str): The user's email address. This is unique and cannot be null.
-        password (str): The user's password (hashed).
-        first_name (str): The user's first name. This is an optional field.
-        last_name (str): The user's last name. This is an optional field.
-        phone (str): The user's phone number. This is an optional field.
-        role (str): The user's role in the system (default is 'user'). This is a required field.
-        iban (str): The user's iban. This is a required field.
+        email (str): The user's email address. This field must be unique and cannot be null.
+        password (str): The hashed password for the user, used for authentication.
+        first_name (str): The user's first name (optional).
+        last_name (str): The user's last name (optional).
+        phone (str): The user's phone number (optional).
+        role (RoleType): The user's role in the system (default is 'user').
+                         This determines the level of access the user has within the system.
+        iban (str): The user's International Bank Account Number (IBAN).
+                    This field is required and defaults to "BE41967053490210" if not provided.
     """
 
     __tablename__ = 'users'

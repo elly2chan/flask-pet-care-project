@@ -9,20 +9,27 @@ from models.enums import Status
 
 class OrderModel(db.Model):
     """
-    Represents an order placed by a customer for a specific product.
+    Represents an order placed by a customer for a specific product in the system.
+
+    This model captures the essential details of an order, including the customer who placed the order,
+    the product being ordered, and the order's status throughout its lifecycle (e.g., pending, approved, rejected).
 
     Attributes:
-        id (int): The unique identifier for the order.
-        created_on (datetime): The timestamp when the order was created.
-        address (str): The delivery address for the order.
-        customer_id (int): The ID of the customer who placed the order.
-        product_id (int): The ID of the product that was ordered.
-        product_title (str): The title of the product ordered.
-        status (Status): The current status of the order (e.g., pending, approved, rejected).
-        quantity (int): The quantity of products in the order.
-        total_price (float): The total price of the order.
-        customer (UserModel): The customer who placed the order, represented by a relationship.
-        product (ProductModel): The product that was ordered, represented by a relationship.
+        id (int): A unique identifier for the order.
+        created_on (datetime): The date and time when the order was created. Automatically set to the current timestamp.
+        address (str): The delivery address associated with the order.
+        customer_id (int): The ID of the customer who placed the order. This is a foreign key referencing the `UserModel`.
+        product_id (int): The ID of the ordered product. This is a foreign key referencing the `ProductModel`.
+        product_title (str): The title/name of the ordered product, stored for reference.
+        status (Status): The current status of the order, which can be one of the following: `pending`, `approved`, or `rejected`.
+        quantity (int): The quantity of the product ordered. Defaults to 1 if not specified.
+        total_price (float): The total price for the order, calculated based on the product price and quantity.
+        customer (UserModel): A relationship to the `UserModel` representing the customer who placed the order.
+        product (ProductModel): A relationship to the `ProductModel` representing the ordered product.
+
+    Relationships:
+        customer (UserModel): The customer who placed the order.
+        product (ProductModel): The product that was ordered.
     """
 
     __tablename__ = "orders"

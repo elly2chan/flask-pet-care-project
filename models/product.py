@@ -8,16 +8,20 @@ from db import db
 
 class ProductModel(db.Model):
     """
-    Represents a product in the system.
+    Represents a product in the inventory system.
+
+    This model defines the structure for a product, including essential details such as
+    the product's title, description, quantity, price, and the timestamp when it was added.
+    It also allows the system to track the product's image URL.
 
     Attributes:
-        id (int): Unique identifier for the product.
-        title (str): The title of the product, which must be unique.
-        description (str): A description of the product.
-        quantity (int): The quantity of the product available in stock. Defaults to 0.
-        price (float): The price of the product. Defaults to 0.0.
-        added_on (datetime): The timestamp when the product was added. Defaults to the current time.
-        photo_url (str): The URL of the product image. This field is optional.
+        id (int): A unique identifier for the product. Automatically assigned by the database.
+        title (str): The name or title of the product. Must be unique across the product catalog.
+        description (str): A detailed description of the product, providing information about its features.
+        quantity (int): The number of units available in stock. Defaults to 0 if not specified.
+        price (float): The price of the product in the system's currency. Defaults to 0.0 if not specified.
+        added_on (datetime): The timestamp of when the product was added to the system. Automatically set to the current time when created.
+        photo_url (str): An optional URL linking to an image of the product, if available. Defaults to `None`.
     """
 
     __tablename__ = "products"
