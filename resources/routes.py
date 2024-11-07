@@ -3,12 +3,12 @@ Defines the API routes and maps them to their respective resources.
 
 Routes:
 - Public: RegisterUser, LoginUser, GetDocumentationPage, GetProducts, GetProduct
-- Authenticated: AddPet, GetPets, EditPet, DeletePet, PlaceOrder
+- Authenticated: AddPet, GetPets, EditPet, DeletePet, PlaceOrder, BookAppointment
 - Admin: AddProduct, EditProduct, DeleteProduct
 
 Each route corresponds to a specific resource handling the logic for that endpoint.
 """
-
+from resources.appointment import BookAppointment
 from resources.auth import RegisterUser, LoginUser, ChangePassword
 from resources.order import PlaceOrder
 from resources.pet import AddPet, GetPets, EditPet, DeletePet
@@ -30,4 +30,6 @@ routes = (
     (EditProduct, "/products/edit_product/<int:product_id>"),  # only admins can edit products
     (DeleteProduct, "/products/delete_product/<int:product_id>"),  # only admins can remove products
     (PlaceOrder, "/orders/place_order"),  # only authenticated users can place orders
+    (BookAppointment, "/appointments/book_appointment"),
+    # only authenticated users can book an appointment if they have any registered pets
 )
