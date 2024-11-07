@@ -9,7 +9,7 @@
 <h3 align=center>
 </div>
 
-[Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features)
+[Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
 
 <!-- DESCRIPTION -->
 ## Description
@@ -145,8 +145,12 @@ WISE_PROFILE_ID = ""
 
 <!-- UPCOMING FUNCTIONALITIES -->
 ## Upcoming Features
+
 - **Vet Appointment Booking**: In a future update, users will be able to schedule appointments for their pets with veterinarians. This feature will allow pet owners to manage their pets’ health and wellness directly through the platform.
 
 
+
+<!-- License -->
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
