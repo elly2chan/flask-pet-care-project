@@ -6,6 +6,9 @@ from werkzeug.exceptions import NotFound, Unauthorized, BadRequest
 from db import db
 from models.enums import RoleType, Gender, PetType
 from models.pet import PetModel
+from services.nyckel import NyckelService
+
+nyckel_service = NyckelService()
 
 
 class PetManager:
@@ -87,3 +90,24 @@ class PetManager:
             raise Unauthorized("You do not have permission to delete this pet.")
 
         db.session.flush()
+
+    @staticmethod
+    def identify_dog_breed(data):
+        """Identify dog breed by provided URL."""
+
+        pet_id, url = data
+
+        pet = db.session.execute(db.select(PetModel).filter_by(id=pet_id)).scalar()
+        if not pet:
+            raise NotFound("Pet not found.")
+
+        if pet.pet_type != PetType.dog:
+            raise BadRequest("Breed identifier is supported only for dogs.")
+
+        result = nyckel_service.identify_dog_breed(url)
+
+        pet_name = pet.name
+        breed = result['labelName']
+        probability = result['confidence']
+
+        return pet_name, breed, probability

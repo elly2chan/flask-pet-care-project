@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from werkzeug.exceptions import NotFound, BadRequest
 
 from managers.auth import auth
 from managers.pet import PetManager
@@ -67,3 +68,28 @@ class DeletePet(Resource):
         user = auth.current_user()
         PetManager.delete_pet(pet_id, user)
         return {"message": f"Pet is deleted successfully."}, 200
+
+
+class IdentifyDogBreed(Resource):
+    @auth.login_required
+    def post(self, pet_id):
+        """
+        Try to identify a dog's breed by a provided URL and pet_id.
+        """
+        auth.current_user()
+
+        data = request.get_json()
+
+        if 'url' not in data:
+            raise BadRequest("The 'url' field is required.")
+
+        url = data['url']
+
+        try:
+            pet_name, breed, probability = PetManager.identify_dog_breed((pet_id, url))
+        except NotFound:
+            raise NotFound(f"Pet with id {pet_id} not found.")
+        except BadRequest as e:
+            raise BadRequest(str(e))
+
+        return {"message": f"Your dog {pet_name}'s breed is {breed}. The probability of that is {probability}."}, 200
