@@ -26,8 +26,8 @@ def login_data():
     ('/products/add_product', 'post', 201),  # Add product
     ('/products', 'get', 200),  # Get all products
     ('/products/1', 'get', 200),  # Get specific product
-    ('/products/edit_product/1', 'put', 204),  # Edit product
-    ('/products/delete_product/1', 'delete', 204)  # Delete product
+    ('/products/edit_product/1', 'put', 201),  # Edit product
+    ('/products/delete_product/1', 'delete', 201)  # Delete product
 ])
 def test_products(client, database, endpoint, method, status_code):
     """
@@ -71,7 +71,8 @@ def test_products(client, database, endpoint, method, status_code):
             "title": "Dog T-Shirt",
         }
         response = client.put(f"/products/edit_product/{product.id}", json=product_data, headers=headers)
-        assert response.json == status_code
+        assert response.status_code == status_code
+        assert response.json == {"message": f"Product is edited successfully."}
         updated_product = db.session.execute(db.select(ProductModel).filter_by(id=product.id)).scalar()
         assert updated_product.title == product_data["title"]
         assert updated_product.title != product_title
@@ -80,6 +81,7 @@ def test_products(client, database, endpoint, method, status_code):
     elif method == 'delete':
         product = ProductFactory()
         response = client.delete(f"/products/delete_product/{product.id}", headers=headers)
-        assert response.json == status_code
+        assert response.status_code == status_code
+        assert response.json == {"message": f"Product is deleted successfully."}
         deleted_product = db.session.execute(db.select(ProductModel).filter_by(id=product.id)).scalar()
         assert deleted_product is None

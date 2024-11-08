@@ -43,14 +43,14 @@ class EditPet(Resource):
         Edit an existing pet's details.
 
         :param pet_id: The ID of the pet to edit
-        :return: status code 204 for successful edit
+        :return: status code 201 for successful edit
         """
         data = request.get_json()
         user = auth.current_user()
 
         try:
             PetManager.edit_pet(pet_id, user, data)
-            return 204
+            return {"message": f"Pet is edited successfully."}, 201
         except ValueError as e:
             return ({"message": str(e)}), 400
 
@@ -66,4 +66,4 @@ class DeletePet(Resource):
         """
         user = auth.current_user()
         PetManager.delete_pet(pet_id, user)
-        return 204
+        return {"message": f"Pet is deleted successfully."}, 201

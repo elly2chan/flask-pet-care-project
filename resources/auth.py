@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from werkzeug.exceptions import Conflict
 
 from managers.auth import auth, AuthManager
 from managers.user import UserManager
@@ -17,8 +18,12 @@ class RegisterUser(Resource):
         :return: dict with token, status code 201
         """
         data = request.get_json()
-        token = UserManager.register(data)
-        return {"token": token}, 201
+        try:
+            token = UserManager.register(data)
+            return {"token": token}, 201
+        except Conflict as e:
+            # Handle the case where the appointment time is already taken
+            return {"message": str(e)}, 409
 
 
 class LoginUser(Resource):

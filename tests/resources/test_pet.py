@@ -24,8 +24,8 @@ def login_data():
 @pytest.mark.parametrize('endpoint, method, status_code', [
     ('/pets/add_pet', 'post', 201),  # Add pet
     ('/pets', 'get', 200),  # Get pets
-    ('/pets/edit_pet/1', 'put', 204),  # Edit pet
-    ('/pets/delete_pet/1', 'delete', 204)  # Delete pet
+    ('/pets/edit_pet/1', 'put', 201),  # Edit pet
+    ('/pets/delete_pet/1', 'delete', 201)  # Delete pet
 ])
 def test_pets(client, database, endpoint, method, status_code):
     """
@@ -66,7 +66,8 @@ def test_pets(client, database, endpoint, method, status_code):
             "breed": "Bulldog",
         }
         response = client.put(f"/pets/edit_pet/{pet.id}", json=pet_data, headers=headers)
-        assert response.json == status_code
+        assert response.status_code == status_code
+        assert response.json == {'message': 'Pet is edited successfully.'}
         updated_pet = PetModel.query.get(pet.id)
         assert updated_pet.breed == "Bulldog"
 
@@ -74,6 +75,7 @@ def test_pets(client, database, endpoint, method, status_code):
     elif method == 'delete':
         pet = PetFactory(owner_id=user.id, owner_email=user.email)
         response = client.delete(f"/pets/delete_pet/{pet.id}", headers=headers)
-        assert response.json == status_code
+        assert response.status_code == status_code
+        assert response.json == {'message': 'Pet is deleted successfully.'}
         deleted_pet = PetModel.query.get(pet.id)
         assert deleted_pet is None

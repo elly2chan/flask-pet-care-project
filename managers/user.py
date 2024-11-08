@@ -1,4 +1,4 @@
-from werkzeug.exceptions import BadRequest
+from werkzeug.exceptions import BadRequest, Conflict
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db import db
@@ -14,6 +14,14 @@ class UserManager:
         hashed_password = generate_password_hash(user_data["password"], method="pbkdf2:sha256")
         user_data["password"] = hashed_password
         user_data["role"] = RoleType.user.name
+
+        existing_user = db.session.execute(
+            db.select(UserModel).filter_by(email=user_data["email"])
+        ).scalar()
+
+        if existing_user:
+            raise Conflict(f"User with email '{user_data['email']}' already exists.")
+
         user = UserModel(**user_data)
 
         try:
