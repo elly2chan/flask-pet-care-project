@@ -14,7 +14,7 @@
 <!-- DESCRIPTION -->
 ## Description
 
-The **PetCare API** is a comprehensive platform designed to help users manage their pets, products, and orders. It provides a set of RESTful endpoints to facilitate user registration, authentication, and the management of pets, products, appointments and orders. The API is structured into three main categories based on authorization levels: **Public**, **Authenticated Users**, and **Admin**.
+The **PetCare API** is a comprehensive platform designed to help users manage their pets, products, appointments, and orders. It provides a set of RESTful endpoints to facilitate user registration, authentication, and the management of pets, products, appointments and orders. The API is structured into three main categories based on authorization levels: **Public**, **Authenticated Users**, and **Admin**.
 
 ### Key Features:
 - **User Management**: Register, login, and change passwords.
