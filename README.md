@@ -22,6 +22,20 @@ The **PetCare API** is a comprehensive platform designed to help users manage th
 - **Product Management**: View products (public) and manage product details (admin).
 - **Order Management**: Place and manage product orders.
 - **Vet Appointment Booking**: Schedule vet appointments for pets.
+- **Dog Breed Identification**: Identify dog breeds via an external service.
+
+## Services Overview
+
+The PetCare API integrates with several external services to provide enhanced functionalities for users:
+
+### 1. **NyckelService** - Dog Breed Identification
+
+The **NyckelService** integrates with the **Nyckel** API to identify dog breeds based on images. Users can upload an image of a dog, and the service will return a prediction of the dog's breed. This service is ideal for pet owners who wish to identify or learn more about their dog's breed through image recognition technology.
+
+### 2. **WiseService** - International Payment Processing
+
+The **WiseService** integrates with the **Wise** (formerly TransferWise) API to facilitate international payments. The service allows users to create quotes for currency exchanges, add recipients using IBAN details, initiate and fund international transfers, and even cancel ongoing transfers. This feature is particularly useful for users who need to send payments internationally for pet-related services or products.
+
 
 ## API Structure
 
