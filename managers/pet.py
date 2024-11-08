@@ -92,7 +92,7 @@ class PetManager:
         db.session.flush()
 
     @staticmethod
-    def identify_dog_breed(data):
+    def identify_dog_breed(user, data):
         """Identify dog breed by provided URL."""
 
         pet_id, url = data
@@ -103,6 +103,10 @@ class PetManager:
 
         if pet.pet_type != PetType.dog:
             raise BadRequest("Breed identifier is supported only for dogs.")
+
+        if pet.owner_id != user.id:
+            raise Unauthorized("You do not have permission to identify this pet's breed. "
+                               "You can identify only your pets.")
 
         result = nyckel_service.identify_dog_breed(url)
 

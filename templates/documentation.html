@@ -348,6 +348,24 @@
                     </div>
                 </div>
 
+                                <!-- Identify Dog's Breed -->
+                <button class="collapsible">POST /pets/identify_dog_breed/{pet_id} - Identify a Dog's Breed</button>
+                <div class="content">
+                    <div class="endpoint">
+                        <h3>POST /pets/identify_dog_breed/{pet_id}</h3>
+                        <p><strong>Description:</strong> Tries to identify a dog's breed by providing a url. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
+                        <p><strong>Request Body:</strong></p>
+                        <pre><code>{
+    "pet_id": 1,
+    "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQC5qNvtQUdFvFdOVhurco8HcIQZzM7VzZ6aJZ9JoysBIlkcGeZ"
+}</code></pre>
+                        <p><strong>Response:</strong></p>
+                        <pre><code>{
+    "message": "Your dog Koda's breed is Yorkshire Terrier. The probability of that is 0.6880940065495394."
+}</code></pre>
+                    </div>
+                </div>
+
             </div>
 
             <!-- appointment Endpoints -->

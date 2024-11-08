@@ -76,7 +76,7 @@ class IdentifyDogBreed(Resource):
         """
         Try to identify a dog's breed by a provided URL and pet_id.
         """
-        auth.current_user()
+        user = auth.current_user()
 
         data = request.get_json()
 
@@ -86,7 +86,7 @@ class IdentifyDogBreed(Resource):
         url = data['url']
 
         try:
-            pet_name, breed, probability = PetManager.identify_dog_breed((pet_id, url))
+            pet_name, breed, probability = PetManager.identify_dog_breed(user, (pet_id, url))
         except NotFound:
             raise NotFound(f"Pet with id {pet_id} not found.")
         except BadRequest as e:
