@@ -8,7 +8,7 @@
 <h1 align=center>PetCare</h1>
 <h3 align=center>
 
-[Description](#description) | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
+[Description](#description) | [Services Overview](#services-overview) | [API Structure](#api-structure)] | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
 </div>
 
 <!-- DESCRIPTION -->
@@ -24,6 +24,7 @@ The **PetCare API** is a comprehensive platform designed to help users manage th
 - **Vet Appointment Booking**: Schedule vet appointments for pets.
 - **Dog Breed Identification**: Identify dog breeds via an external service.
 
+<!-- SERVICES OVERVIEW -->
 ## Services Overview
 
 The PetCare API integrates with several external services to provide enhanced functionalities for users:
@@ -37,6 +38,7 @@ The **NyckelService** integrates with the **Nyckel** API to identify dog breeds 
 The **WiseService** integrates with the **Wise** (formerly TransferWise) API to facilitate international payments. The service allows users to create quotes for currency exchanges, add recipients using IBAN details, initiate and fund international transfers, and even cancel ongoing transfers. This feature is particularly useful for users who need to send payments internationally for pet-related services or products.
 
 
+<!-- API STRUCTURE -->
 ## API Structure
 
 The PetCare API is structured into different endpoints based on user authentication levels:
@@ -56,6 +58,7 @@ Accessible only to authenticated users (via JWT token):
 - `POST /orders/place_order` - Place an order for products.
 - `POST /users/change_password` - Change the user's password.
 - `POST /appointments/book_appointment` - Book a vet appointment for a user's pet.
+- `POST /pets/identify_dog_breed/{pet_id}` - Identify a dog's breed. 
 
 ### Admin Endpoints
 Restricted to users with admin roles:
