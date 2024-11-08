@@ -8,7 +8,9 @@
 <h1 align=center>PetCare</h1>
 <h3 align=center>
 
-[Description](#description) | [Services Overview](#services-overview) | [API Structure](#api-structure)] | [Installation](#installation) | [Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
+[Description](#description) | [Services Overview](#services-overview) | [API Structure](#api-structure) | [Installation](#installation) 
+<br>
+[Roadmap](#roadmap) | [Bonuses](#bonuses) | [Upcoming Features](#upcoming-features) | [License](#license)
 </div>
 
 <!-- DESCRIPTION -->
