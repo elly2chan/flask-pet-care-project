@@ -69,7 +69,7 @@ class EditProduct(Resource):
 
         try:
             ProductManager.edit_product(product_id, data)
-            return {"message": f"Product is edited successfully."}, 201
+            return {"message": f"Product is edited successfully."}, 200
         except ValueError as e:
             return ({"message": str(e)}), 400
 
@@ -87,4 +87,4 @@ class DeleteProduct(Resource):
         :return: HTTP status code 204 indicating the product was successfully deleted.
         """
         ProductManager.delete_product(product_id)
-        return {"message": f"Product is deleted successfully."}, 201
+        return {"message": f"Product is deleted successfully."}, 200

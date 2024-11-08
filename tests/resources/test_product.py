@@ -26,8 +26,8 @@ def login_data():
     ('/products/add_product', 'post', 201),  # Add product
     ('/products', 'get', 200),  # Get all products
     ('/products/1', 'get', 200),  # Get specific product
-    ('/products/edit_product/1', 'put', 201),  # Edit product
-    ('/products/delete_product/1', 'delete', 201)  # Delete product
+    ('/products/edit_product/1', 'put', 200),  # Edit product
+    ('/products/delete_product/1', 'delete', 200)  # Delete product
 ])
 def test_products(client, database, endpoint, method, status_code):
     """

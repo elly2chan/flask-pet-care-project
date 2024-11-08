@@ -50,7 +50,7 @@ class EditPet(Resource):
 
         try:
             PetManager.edit_pet(pet_id, user, data)
-            return {"message": f"Pet is edited successfully."}, 201
+            return {"message": f"Pet is edited successfully."}, 200
         except ValueError as e:
             return ({"message": str(e)}), 400
 
@@ -66,4 +66,4 @@ class DeletePet(Resource):
         """
         user = auth.current_user()
         PetManager.delete_pet(pet_id, user)
-        return {"message": f"Pet is deleted successfully."}, 201
+        return {"message": f"Pet is deleted successfully."}, 200

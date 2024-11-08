@@ -24,8 +24,8 @@ def login_data():
 @pytest.mark.parametrize('endpoint, method, status_code', [
     ('/pets/add_pet', 'post', 201),  # Add pet
     ('/pets', 'get', 200),  # Get pets
-    ('/pets/edit_pet/1', 'put', 201),  # Edit pet
-    ('/pets/delete_pet/1', 'delete', 201)  # Delete pet
+    ('/pets/edit_pet/1', 'put', 200),  # Edit pet
+    ('/pets/delete_pet/1', 'delete', 200)  # Delete pet
 ])
 def test_pets(client, database, endpoint, method, status_code):
     """
