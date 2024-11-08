@@ -35,7 +35,7 @@ class BaseOrderSchema(Schema):
 
 class BaseProductSchema(Schema):
     """Base schema for product data, including title, description, quantity, price, and photo URL."""
-    
+
     title = fields.String(required=True)
     description = fields.String(required=True)
     quantity = fields.Integer(required=True)

@@ -1,6 +1,3 @@
-import pytest
-from werkzeug.exceptions import NotFound
-
 from db import db
 from models import UserModel
 from tests.base import app, database, client

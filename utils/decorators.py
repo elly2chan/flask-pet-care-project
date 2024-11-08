@@ -15,7 +15,9 @@ def validate_schema(schema_name):
             if errors:
                 raise BadRequest(f"Invalid fields {errors}")
             return f(*args, **kwargs)
+
         return decorated_function
+
     return decorator
 
 
@@ -27,5 +29,7 @@ def permission_required(required_role):
             if current_user.role != required_role:
                 raise Forbidden("You do not have permission to access this resource.")
             return func(*args, **kwargs)
+
         return decorated_func
+
     return decorator

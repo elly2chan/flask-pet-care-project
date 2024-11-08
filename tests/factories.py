@@ -52,12 +52,14 @@ class PetFactory(BaseFactory):
     id = factory.Sequence(lambda n: n)
     name = factory.Faker("first_name")  # Random pet name, can adjust as needed
     gender = factory.Faker("random_element", elements=[Gender.male, Gender.female])
-    date_of_birth = factory.Faker("date_of_birth", minimum_age=1, maximum_age=20)  # Pets are usually not younger than 1 and not older than 20 years
+    date_of_birth = factory.Faker("date_of_birth", minimum_age=1,
+                                  maximum_age=20)  # Pets are usually not younger than 1 and not older than 20 years
     breed = factory.Faker("word")  # Random breed, adjust to your needs
     owner_id = factory.SubFactory(UserFactory)  # A pet belongs to a user
     pet_type = factory.Faker("random_element", elements=[PetType.dog, PetType.cat])  # Random pet type (Dog or Cat)
     is_stray = factory.Faker("boolean", chance_of_getting_true=20)  # 20% chance the pet is stray
     european_passport = factory.Faker("boolean", chance_of_getting_true=50)  # 50% chance the pet has a passport
     microchip = factory.Faker("boolean", chance_of_getting_true=50)  # 50% chance the pet has a microchip
-    microchip_id = factory.LazyAttribute(lambda _: str(uuid4())[:20])  # Random microchip ID, can be None if not microchipped
+    microchip_id = factory.LazyAttribute(
+        lambda _: str(uuid4())[:20])  # Random microchip ID, can be None if not microchipped
     added_on = factory.Faker("date_this_decade")  # Random date from the last 10 years for when the pet was added

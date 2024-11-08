@@ -6,7 +6,8 @@
     <title>PetCare API Documentation</title>
 
     <!-- External CSS (Google Fonts) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap"
+          rel="stylesheet">
 
     <style>
         /* Global Styles */
@@ -28,7 +29,7 @@
         /* Container */
         .container {
             width: 100%;
-            max-width: 960px;  /* Restrict width to 960px */
+            max-width: 960px; /* Restrict width to 960px */
             padding: 40px;
             background-color: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -155,12 +156,15 @@
             .container {
                 padding: 20px;
             }
+
             header h1 {
                 font-size: 2rem;
             }
+
             h2 {
                 font-size: 1.5rem;
             }
+
             .endpoint h3 {
                 font-size: 1.2rem;
             }
@@ -169,30 +173,32 @@
 </head>
 <body>
 
-    <header>
-        <h1>Project API Documentation</h1>
-        <p>The PetCare API is a comprehensive platform designed to help users manage their pets, products, appointments, and orders.</p>
-    </header>
+<header>
+    <h1>Project API Documentation</h1>
+    <p>The PetCare API is a comprehensive platform designed to help users manage their pets, products, appointments, and
+        orders.</p>
+</header>
 
-    <div class="container">
+<div class="container">
 
-        <!-- API Documentation -->
+    <!-- API Documentation -->
 
-        <section>
-            <h2>Available Endpoints</h2>
+    <section>
+        <h2>Available Endpoints</h2>
 
-            <!-- user Endpoints -->
-            <button class="collapsible">User Endpoints</button>
+        <!-- user Endpoints -->
+        <button class="collapsible">User Endpoints</button>
+        <div class="content">
+
+            <!-- Register User -->
+            <button class="collapsible">POST /register - Register a User</button>
             <div class="content">
-
-                <!-- Register User -->
-                <button class="collapsible">POST /register - Register a User</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /register</h3>
-                        <p><strong>Description:</strong> Registers a new user. <strong>Authorization:</strong> No authentication required (public).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+                <div class="endpoint">
+                    <h3>POST /register</h3>
+                    <p><strong>Description:</strong> Registers a new user. <strong>Authorization:</strong> No
+                        authentication required (public).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "email": "user@example.com",
     "password": "SecurePassword123",
     "first_name": "John",
@@ -200,63 +206,66 @@
     "phone": "1234567890",
     "iban": "DE89370400440532013000"
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "token": "JWT-TOKEN"
 }</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Login User -->
-                <button class="collapsible">POST /login - Log in a User</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /login</h3>
-                        <p><strong>Description:</strong> Authenticates a user and returns a token. <strong>Authorization:</strong> No authentication required (public).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+            <!-- Login User -->
+            <button class="collapsible">POST /login - Log in a User</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>POST /login</h3>
+                    <p><strong>Description:</strong> Authenticates a user and returns a token.
+                        <strong>Authorization:</strong> No authentication required (public).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "email": "user@example.com",
     "password": "SecurePassword123"
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "token": "JWT-TOKEN"
 }</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Change Password -->
-                <button class="collapsible">POST /users/change_password - Change Password</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /users/change_password</h3>
-                        <p><strong>Description:</strong> Changes the password of the authenticated user. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+            <!-- Change Password -->
+            <button class="collapsible">POST /users/change_password - Change Password</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>POST /users/change_password</h3>
+                    <p><strong>Description:</strong> Changes the password of the authenticated user. <strong>Authorization:</strong>
+                        Requires authentication (JWT token).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "current_password": "OldPassword123",
     "new_password": "NewSecurePassword123"
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "message": "Password changed successfully"
 }</code></pre>
-                    </div>
                 </div>
-
             </div>
 
-            <!-- pet Endpoints -->
-            <button class="collapsible">Pet Endpoints</button>
+        </div>
+
+        <!-- pet Endpoints -->
+        <button class="collapsible">Pet Endpoints</button>
+        <div class="content">
+
+            <!-- Add Pet -->
+            <button class="collapsible">POST /pets/add_pet - Add a Pet</button>
             <div class="content">
-
-                <!-- Add Pet -->
-                <button class="collapsible">POST /pets/add_pet - Add a Pet</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /pets/add_pet</h3>
-                        <p><strong>Description:</strong> Adds a new pet for the authenticated user. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+                <div class="endpoint">
+                    <h3>POST /pets/add_pet</h3>
+                    <p><strong>Description:</strong> Adds a new pet for the authenticated user.
+                        <strong>Authorization:</strong> Requires authentication (JWT token).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "name": "Koda",
     "gender": "male",
     "date_of_birth": "2024-07-28",
@@ -267,8 +276,8 @@
     "microchip": true,
     "microchip_id": "1234567890"
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "name": "Koda",
     "gender": "male",
     "date_of_birth": "2024-07-28",
@@ -279,17 +288,19 @@
     "microchip": true,
     "microchip_id": "1234567890"
 }</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Get Pets -->
-                <button class="collapsible">GET /pets - Get Pets</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>GET /pets</h3>
-                        <p><strong>Description:</strong> Retrieves all pets of the authenticated user. Admins can see all pets. <strong>Authorization:</strong> Requires authentication (JWT token), admin can view all pets.</p>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>[
+            <!-- Get Pets -->
+            <button class="collapsible">GET /pets - Get Pets</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>GET /pets</h3>
+                    <p><strong>Description:</strong> Retrieves all pets of the authenticated user. Admins can see all
+                        pets. <strong>Authorization:</strong> Requires authentication (JWT token), admin can view all
+                        pets.</p>
+                    <p><strong>Response:</strong></p>
+                    <pre><code>[
     {
         "name": "Archie",
         "gender": "male",
@@ -314,78 +325,82 @@
     }
 ]
 </code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Edit Pet -->
-                <button class="collapsible">PUT /pets/edit_pet/{pet_id} - Edit a Pet</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>PUT /pets/edit_pet/{pet_id}</h3>
-                        <p><strong>Description:</strong> Edits the details of a specific pet. Admins can edit any pet. <strong>Authorization:</strong> Requires authentication (JWT token), admin can edit any pet.</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+            <!-- Edit Pet -->
+            <button class="collapsible">PUT /pets/edit_pet/{pet_id} - Edit a Pet</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>PUT /pets/edit_pet/{pet_id}</h3>
+                    <p><strong>Description:</strong> Edits the details of a specific pet. Admins can edit any pet.
+                        <strong>Authorization:</strong> Requires authentication (JWT token), admin can edit any pet.</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "name": "Rexy",
     "breed": "Mixed Breed",
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "message": "Pet edited successfully"
 }</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Delete Pet -->
-                <button class="collapsible">DELETE /pets/delete_pet/{pet_id} - Delete a Pet</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>DELETE /pets/delete_pet/{pet_id}</h3>
-                        <p><strong>Description:</strong> Deletes a specific pet. Admins can delete any pet. <strong>Authorization:</strong> Requires authentication (JWT token), admin can delete any pet.</p>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+            <!-- Delete Pet -->
+            <button class="collapsible">DELETE /pets/delete_pet/{pet_id} - Delete a Pet</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>DELETE /pets/delete_pet/{pet_id}</h3>
+                    <p><strong>Description:</strong> Deletes a specific pet. Admins can delete any pet. <strong>Authorization:</strong>
+                        Requires authentication (JWT token), admin can delete any pet.</p>
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "message": "Pet deleted successfully"
 }</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                                <!-- Identify Dog's Breed -->
-                <button class="collapsible">POST /pets/identify_dog_breed/{pet_id} - Identify a Dog's Breed</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /pets/identify_dog_breed/{pet_id}</h3>
-                        <p><strong>Description:</strong> Tries to identify a dog's breed by providing a url. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+            <!-- Identify Dog's Breed -->
+            <button class="collapsible">POST /pets/identify_dog_breed/{pet_id} - Identify a Dog's Breed</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>POST /pets/identify_dog_breed/{pet_id}</h3>
+                    <p><strong>Description:</strong> Tries to identify a dog's breed by providing a url. <strong>Authorization:</strong>
+                        Requires authentication (JWT token).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "pet_id": 1,
     "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQC5qNvtQUdFvFdOVhurco8HcIQZzM7VzZ6aJZ9JoysBIlkcGeZ"
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "message": "Your dog Koda's breed is Yorkshire Terrier. The probability of that is 0.6880940065495394."
 }</code></pre>
-                    </div>
                 </div>
-
             </div>
 
-            <!-- appointment Endpoints -->
-            <button class="collapsible">Appointment Endpoints</button>
-            <div class="content">
+        </div>
 
-                <!-- Book Appointment -->
-                <button class="collapsible">POST /appointments/book - Book an Appointment</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /appointments/book</h3>
-                        <p><strong>Description:</strong> Books an appointment for the authenticated user's pet. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+        <!-- appointment Endpoints -->
+        <button class="collapsible">Appointment Endpoints</button>
+        <div class="content">
+
+            <!-- Book Appointment -->
+            <button class="collapsible">POST /appointments/book - Book an Appointment</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>POST /appointments/book</h3>
+                    <p><strong>Description:</strong> Books an appointment for the authenticated user's pet. <strong>Authorization:</strong>
+                        Requires authentication (JWT token).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "appointment_datetime": "2024-05-06 15:00:05",
     "pet_name": "Koda",
     "appointment_reason": "Vaccine"
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "id": 1,
     "appointment_datetime": "2024-05-06 15:00:05",
     "owner_id": 1,
@@ -395,29 +410,30 @@
     "pet_name": "Koda",
     "appointment_reason": "Vaccine"
 }</code></pre>
-                    </div>
                 </div>
-
             </div>
 
-            <!-- order Endpoints -->
-            <button class="collapsible">Order Endpoints</button>
-            <div class="content">
+        </div>
 
-                <!-- Place Order -->
-                <button class="collapsible">POST /orders/place_order - Place an Order</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /orders/place_order</h3>
-                        <p><strong>Description:</strong> Allows authenticated users to place an order. <strong>Authorization:</strong> Requires authentication (JWT token).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+        <!-- order Endpoints -->
+        <button class="collapsible">Order Endpoints</button>
+        <div class="content">
+
+            <!-- Place Order -->
+            <button class="collapsible">POST /orders/place_order - Place an Order</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>POST /orders/place_order</h3>
+                    <p><strong>Description:</strong> Allows authenticated users to place an order. <strong>Authorization:</strong>
+                        Requires authentication (JWT token).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "address": "Sofia, Reduta",
     "product_id": 1,
     "quantity": 3
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "address": "Sofia, Reduta",
     "id": 1,
     "created_on": "2024-11-08T11:09:59.234054",
@@ -428,23 +444,24 @@
     "quantity": 1,
     "total_price": 5.5
 }</code></pre>
-                    </div>
                 </div>
-
             </div>
 
-            <!-- product Endpoints -->
-            <button class="collapsible">Product Endpoints</button>
-            <div class="content">
+        </div>
 
-                <!-- Get Products -->
-                <button class="collapsible">GET /products - Get all Products</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>GET /products</h3>
-                        <p><strong>Description:</strong> Retrieves a list of all available products. <strong>Authorization:</strong> No authentication required (public).</p>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>[
+        <!-- product Endpoints -->
+        <button class="collapsible">Product Endpoints</button>
+        <div class="content">
+
+            <!-- Get Products -->
+            <button class="collapsible">GET /products - Get all Products</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>GET /products</h3>
+                    <p><strong>Description:</strong> Retrieves a list of all available products.
+                        <strong>Authorization:</strong> No authentication required (public).</p>
+                    <p><strong>Response:</strong></p>
+                    <pre><code>[
     {
         "title": "Dog T-Shirt",
         "description": "A funny dog T-Shirt",
@@ -453,107 +470,111 @@
         "photo_url": "https://www.dfordog.co.uk/user/products/large/hawaiian-dog-shirt-blue-oasis.jpg"
     }
 ]</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Get Product -->
-                <button class="collapsible">GET /products/{product_id} - Get a Product</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>GET /products/{product_id}</h3>
-                        <p><strong>Description:</strong> Retrieves details of a specific product. <strong>Authorization:</strong> No authentication required (public).</p>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+            <!-- Get Product -->
+            <button class="collapsible">GET /products/{product_id} - Get a Product</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>GET /products/{product_id}</h3>
+                    <p><strong>Description:</strong> Retrieves details of a specific product.
+                        <strong>Authorization:</strong> No authentication required (public).</p>
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "title": "Dog T-Shirt",
     "description": "A funny dog T-Shirt",
     "quantity": 34,
     "price": 5.5,
     "photo_url": "https://www.dfordog.co.uk/user/products/large/hawaiian-dog-shirt-blue-oasis.jpg"
 }</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Add Product -->
-                <button class="collapsible">POST /products/add_product - Add a Product</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>POST /products/add_product</h3>
-                        <p><strong>Description:</strong> Allows admins to add a new product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+            <!-- Add Product -->
+            <button class="collapsible">POST /products/add_product - Add a Product</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>POST /products/add_product</h3>
+                    <p><strong>Description:</strong> Allows admins to add a new product. <strong>Authorization:</strong>
+                        Requires admin authentication (JWT token).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "title": "Dog T-Shirt",
     "description": "A funny dog T-Shirt",
     "quantity": 34,
     "price": 5.5,
     "photo_url": "https://www.dfordog.co.uk/user/products/large/hawaiian-dog-shirt-blue-oasis.jpg"
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "title": "Dog T-Shirt",
     "description": "A funny dog T-Shirt",
     "quantity": 34,
     "price": 5.5,
     "photo_url": "https://www.dfordog.co.uk/user/products/large/hawaiian-dog-shirt-blue-oasis.jpg"
 }</code></pre>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Edit Product -->
-                <button class="collapsible">PUT /products/edit_product/{product_id} - Edit a Product</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>PUT /products/edit_product/{product_id}</h3>
-                        <p><strong>Description:</strong> Allows admins to edit a product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
-                        <p><strong>Request Body:</strong></p>
-                        <pre><code>{
+            <!-- Edit Product -->
+            <button class="collapsible">PUT /products/edit_product/{product_id} - Edit a Product</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>PUT /products/edit_product/{product_id}</h3>
+                    <p><strong>Description:</strong> Allows admins to edit a product. <strong>Authorization:</strong>
+                        Requires admin authentication (JWT token).</p>
+                    <p><strong>Request Body:</strong></p>
+                    <pre><code>{
     "title": "Updated Product Name",
     "price": 25.99
 }</code></pre>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
     "message": "Product edited successfully"
 }</code></pre>
-                    </div>
                 </div>
-
-                <!-- Delete Product -->
-                <button class="collapsible">DELETE /products/delete_product/{product_id} - Delete a Product</button>
-                <div class="content">
-                    <div class="endpoint">
-                        <h3>DELETE /products/delete_product/{product_id}</h3>
-                        <p><strong>Description:</strong> Allows admins to delete a product. <strong>Authorization:</strong> Requires admin authentication (JWT token).</p>
-                        <p><strong>Response:</strong></p>
-                        <pre><code>{
-    "message": "Product deleted successfully"
-}</code></pre>
-                    </div>
-                </div>
-
             </div>
 
-        </section>
+            <!-- Delete Product -->
+            <button class="collapsible">DELETE /products/delete_product/{product_id} - Delete a Product</button>
+            <div class="content">
+                <div class="endpoint">
+                    <h3>DELETE /products/delete_product/{product_id}</h3>
+                    <p><strong>Description:</strong> Allows admins to delete a product. <strong>Authorization:</strong>
+                        Requires admin authentication (JWT token).</p>
+                    <p><strong>Response:</strong></p>
+                    <pre><code>{
+    "message": "Product deleted successfully"
+}</code></pre>
+                </div>
+            </div>
 
-    </div>
+        </div>
 
-    <footer>
-        <p>Created by <a href="https://github.com/elly2chan" target="_blank">Elena Konstantinova</a> - 2024</p>
-    </footer>
+    </section>
 
-    <!-- Collapsible script -->
-    <script>
-        var coll = document.getElementsByClassName("collapsible");
-        for (var i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            });
-        }
-    </script>
+</div>
+
+<footer>
+    <p>Created by <a href="https://github.com/elly2chan" target="_blank">Elena Konstantinova</a> - 2024</p>
+</footer>
+
+<!-- Collapsible script -->
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    for (var i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
