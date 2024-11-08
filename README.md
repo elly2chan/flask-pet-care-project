@@ -34,7 +34,7 @@ The PetCare API integrates with several external services to provide enhanced fu
 ### 1. **NyckelService** - Dog Breed Identification
 https://www.nyckel.com/pretrained-classifiers/dog-breed-identifier/
 
-The **NyckelService** integrates with the **Nyckel** API to identify dog breeds based on images. Users can upload an image of a dog, and the service will return a prediction of the dog's breed. This service is ideal for pet owners who wish to identify or learn more about their dog's breed through image recognition technology.
+The **NyckelService** integrates with the **Nyckel** API to identify dog breeds based on images. Users can provide a link to an image of a dog, and the service will return a prediction of the dog's breed. This service is ideal for pet owners who wish to identify or learn more about their dog's breed through image recognition technology.
 
 ### 2. **WiseService** - International Payment Processing
 https://sandbox.transferwise.tech
